@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 부정적분과 정적분의 관계</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e40af;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-ftc1 { background:#dbeafe; color:#1e40af; }
+  .tag-ftc2 { background:#dcfce7; color:#166534; }
+  .info-panel {
+    background:#fff7ed; border-left:5px solid #f97316; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>부정적분과 정적분의 관계 (FTC)</h1>
+  <div class="lead">
+    부정적분은 <b>미분의 역연산</b>으로서의 함수를 찾는 과정이며, 정적분은 <b>곡선 아래의 넓이</b>를 합산하는 과정입니다. <b>미적분학의 기본 정리(Fundamental Theorem of Calculus)</b>는 이 두 독립적인 개념을 하나로 묶어줍니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-ftc1">FTC Part 1: Integral as a Function</div>
+      <h2>1. 미적분학의 기본 정리 1부</h2>
+      <p>정적분으로 정의된 함수를 미분하면 원래의 함수가 된다는 정리입니다. 즉, 적분은 미분의 역작용임을 증명합니다.</p>
+      
+      <div class="formula-container">
+        $$\frac{d}{dx} \int_{a}^{x} f(t) dt = f(x)$$
+      </div>
+      
+      <h3>의미와 해석</h3>
+      <ul>
+        <li>넓이 함수 $g(x) = \int_a^x f(t) dt$의 변화율은 바로 그 점에서의 높이 $f(x)$와 같습니다.</li>
+        <li>모든 연속함수는 항상 원시함수(부정적분)를 가짐을 보장합니다.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-ftc2">FTC Part 2: Evaluation Theorem</div>
+      <h2>2. 미적분학의 기본 정리 2부</h2>
+      <p>정적분 값을 계산할 때, 리만 합의 극한을 취하는 대신 부정적분(원시함수)의 차이를 이용할 수 있게 해줍니다.</p>
+      
+      <div class="formula-container">
+        $$\int_{a}^{b} f(x) dx = F(b) - F(a)$$
+        <p style="font-size:0.9rem; text-align:center;">(단, $F'(x) = f(x)$)</p>
+      </div>
+      
+      <h3>계산적 가치</h3>
+      <ul>
+        <li>복잡한 무한 급수의 계산을 단순한 뺄셈 문제로 치환합니다.</li>
+        <li>부정적분($\int f dx$)과 정적분($\int_a^b f dx$)을 잇는 실질적인 다리 역할을 합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>핵심 개념 비교</h2>
+  <table style="width:100%; border-collapse: collapse; margin: 20px 0; border: 1px solid #e2e8f0;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th style="padding:12px; border:1px solid #e2e8f0;">구분</th>
+        <th style="padding:12px; border:1px solid #e2e8f0;">부정적분 (Indefinite)</th>
+        <th style="padding:12px; border:1px solid #e2e8f0;">정적분 (Definite)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:12px; border:1px solid #e2e8f0; font-weight:bold;">정의</td>
+        <td style="padding:12px; border:1px solid #e2e8f0;">미분의 역연산 (함수군)</td>
+        <td style="padding:12px; border:1px solid #e2e8f0;">리만 합의 극한 (스칼라 값)</td>
+      </tr>
+      <tr>
+        <td style="padding:12px; border:1px solid #e2e8f0; font-weight:bold;">결과물</td>
+        <td style="padding:12px; border:1px solid #e2e8f0;">$F(x) + C$ (함수)</td>
+        <td style="padding:12px; border:1px solid #e2e8f0;">실수값 (넓이/유량 등)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-panel">
+    <strong>고급 팁:</strong> 변수가 상수가 아닌 함수로 주어진 경우(라이프니츠 규칙의 특수 사례) 미분은 다음과 같습니다.
+    <div class="formula-container" style="background:#0f172a; margin-top:10px;">
+      $$\frac{d}{dx} \int_{h(x)}^{g(x)} f(t) dt = f(g(x))g'(x) - f(h(x))h'(x)$$
+    </div>
+  </div>
+
+  <div class="footer">
+    이 정리는 물리학에서 <b>에너지 보존 법칙</b>(일-에너지 정리)을 수학적으로 증명하는 토대가 됩니다. <br>
+    © 2026 Calculus Foundation Series
+  </div>
+</div>
+</body>
+</html>

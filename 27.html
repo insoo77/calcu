@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 로피탈의 정리 증명</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#92400e;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #f59e0b; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#fef3c7; color:#92400e;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>로피탈의 정리 증명 (L'Hôpital's Rule)</h1>
+  <div class="lead">
+    로피탈의 정리는 두 함수의 비의 극한이 <b>부정형</b>일 때, 도함수의 비의 극한으로 이를 대체할 수 있음을 보여줍니다. 이 증명은 <b>코시의 평균값 정리</b>의 직접적인 응용입니다.
+  </div>
+
+  <h2>1. 정리의 가정 (0/0 꼴)</h2>
+  <p>함수 $f$와 $g$가 점 $a$를 포함하는 열린 구간에서 미분 가능하고 다음을 만족한다고 가정합니다.</p>
+  <ul>
+    <li>$\lim_{x \to a} f(x) = 0, \quad \lim_{x \to a} g(x) = 0$</li>
+    <li>$a$ 근처에서 $g'(x) \neq 0$</li>
+    <li>극한 $\lim_{x \to a} \frac{f'(x)}{g'(x)} = L$ 이 존재함 (실수 또는 $\pm\infty$)</li>
+  </ul>
+
+  <div class="formula-container">
+    $$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
+  </div>
+
+  <h2>2. 코시의 MVT를 이용한 증명</h2>
+  <div class="concept-box" style="border-left: 5px solid #f59e0b;">
+    <div class="badge">Proof Step-by-Step</div>
+    <p>편의를 위해 $x \to a^+$인 우극한의 경우를 증명합니다.</p>
+    <ol>
+      <li><b>함수의 확장:</b> $f(a)=0, g(a)=0$으로 정의하면, $f$와 $g$는 $[a, x]$에서 연속입니다.</li>
+      <li><b>코시의 평균값 정리 적용:</b> 구간 $[a, x]$에서 코시의 MVT에 의해 다음을 만족하는 $c$가 $a$와 $x$ 사이에 존재합니다.
+        <div class="formula-container" style="background:#2d3748;">
+          $$\frac{f(x) - f(a)}{g(x) - g(a)} = \frac{f'(c)}{g'(c)}$$
+        </div>
+      </li>
+      <li><b>조건 대입:</b> $f(a)=0, g(a)=0$이므로 식이 다음과 같이 단순화됩니다.
+        <div class="formula-container" style="background:#2d3748;">
+          $$\frac{f(x)}{g(x)} = \frac{f'(c)}{g'(c)}$$
+        </div>
+      </li>
+      <li><b>극한 취하기:</b> $x \to a^+$이면 샌드위치 정리에 의해 $c \to a^+$가 됩니다. 따라서:
+        <div class="formula-container" style="background:#2d3748;">
+          $$\lim_{x \to a^+} \frac{f(x)}{g(x)} = \lim_{c \to a^+} \frac{f'(c)}{g'(c)} = L$$
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  
+
+  <h2>3. 주의사항 및 한계</h2>
+  <div class="concept-box">
+    <ul>
+      <li><b>도함수의 극한 존재:</b> $\lim \frac{f'}{g'}$이 존재하지 않는다고 해서 원래 극한이 없는 것은 아닙니다. 단지 로피탈의 정리를 사용할 수 없을 뿐입니다.</li>
+      <li><b>순환 논리 조심:</b> $\lim_{x \to 0} \frac{\sin x}{x}$를 증명할 때 $\sin x$의 미분이 $\cos x$임을 이용한다면, 이미 그 미분 공식 유도에 $\lim \frac{\sin x}{x} = 1$이 사용되었으므로 순환 논리에 빠지게 됩니다.</li>
+    </ul>
+  </div>
+
+  <h2>4. 무한대($\infty/\infty$) 꼴로의 확장</h2>
+  <p>$\infty/\infty$ 꼴의 증명은 $\epsilon-\delta$ 논법을 사용하여 더 복잡한 과정을 거치지만, 본질적으로는 코시의 MVT를 적절한 구간 $[x, x_0]$에 적용하여 함숫값의 비를 도함수의 비로 억제하는 원리를 따릅니다.</p>
+
+  <div class="footer">
+    로피탈의 정리는 강력하지만, 복잡한 초월함수의 극한에서는 <b>테일러 급수</b>를 이용하는 것이 훨씬 직관적이고 빠를 수 있습니다. <br>
+    © 2026 Advanced Calculus Analysis Series
+  </div>
+</div>
+</body>
+</html>

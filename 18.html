@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 균등연속성 활용 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#064e3b;}
+  .lead{
+    font-size:1.1rem; background:#f0fdf4; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px;
+  }
+  .status-yes { background:#dcfce7; color:#15803d; }
+  .status-no { background:#fee2e2; color:#b91c1c; }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #059669; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>균등연속성 실전 판정 및 활용 예제</h1>
+  <div class="lead">
+    함수가 균등연속인지 판정할 때는 <b>하이네-칸토어 정리</b>(컴팩트 구간), <b>립시츠 조건</b>(도함수의 유계성), 혹은 <b>수열 판정법</b>(비균등연속 증명)을 주로 사용합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge status-yes">균등연속 (립시츠)</div>
+    <div class="problem">예제 1. $f(x) = \sin(x^2)$은 구간 $[0, 10]$에서 균등연속임을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[판정]</span> 닫힌 구간 $[0, 10]$은 컴팩트 집합이다.
+      <span class="step-title">[풀이]</span> $f(x)$는 해당 구간에서 연속이므로 하이네-칸토어 정리에 의해 균등연속이다. 
+      또한, $f'(x) = 2x \cos(x^2)$이고 $|f'(x)| \le 20$으로 유계이므로 립시츠 조건에 의해서도 균등연속임이 자명하다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge status-no">비균등연속 (수열 판정)</div>
+    <div class="problem">예제 2. $f(x) = \sin(x^2)$은 구간 $[0, \infty)$에서 균등연속이 아님을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[전략]</span> $|x_n - y_n| \to 0$이지만 $|f(x_n) - f(y_n)| \ge \epsilon$인 두 수열을 찾는다.
+      <span class="step-title">[수열 설정]</span> $x_n = \sqrt{2n\pi + \frac{\pi}{2}}$, $y_n = \sqrt{2n\pi}$라 하자.
+      <div class="formula-container">
+        $$|x_n - y_n| = \frac{\pi/2}{\sqrt{2n\pi + \pi/2} + \sqrt{2n\pi}} \to 0 \quad (n \to \infty)$$
+      </div>
+      <span class="step-title">[결과]</span> $|f(x_n) - f(y_n)| = |\sin(2n\pi + \pi/2) - \sin(2n\pi)| = |1 - 0| = 1$.
+      거리는 가까워지는데 함숫값 차이는 줄어들지 않으므로 균등연속이 아니다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge status-yes">균등연속 (연속 확장)</div>
+    <div class="problem">예제 3. $f(x) = \sqrt{x}$는 구간 $[0, \infty)$에서 균등연속임을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[분할 증명]</span> 구간을 $[0, 1]$과 $[1, \infty)$으로 나눈다.
+      <ol>
+        <li>$[0, 1]$: 컴팩트 구간이므로 연속함수는 균등연속이다.</li>
+        <li>$[1, \infty)$: $f'(x) = \frac{1}{2\sqrt{x}} \le \frac{1}{2}$로 도함수가 유계이다. 따라서 립시츠 연속이며 균등연속이다.</li>
+      </ol>
+      <span class="step-title">[결론]</span> 두 구간의 접합부에서 연속이므로 전체 구간에서 균등연속이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge status-no">비균등연속 (발산)</div>
+    <div class="problem">예제 4. $f(x) = x^2$은 $\mathbb{R}$에서 균등연속이 아님을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[수열 판정]</span> $x_n = n + \frac{1}{n}$, $y_n = n$이라 하자.
+      <div class="formula-container">
+        $$|x_n - y_n| = \frac{1}{n} \to 0$$
+        $$|f(x_n) - f(y_n)| = (n^2 + 2 + \frac{1}{n^2}) - n^2 = 2 + \frac{1}{n^2} \to 2$$
+      </div>
+      $\epsilon = 1$로 잡으면 $|x_n - y_n|$이 아무리 작아져도 함숫값 차이는 2 근처에 머물므로 균등연속 정의에 어긋난다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge status-yes">균등연속 성질 활용</div>
+    <div class="problem">예제 5. $f$가 $(0, 1]$에서 균등연속이면, $\lim_{x \to 0^+} f(x)$가 존재함을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명 아이디어]</span> 코시 수열(Cauchy sequence)의 보존성을 이용한다.
+      <p>1. $x_n \to 0$인 임의의 수열 $\{x_n\}$을 잡으면, 이는 코시 수열이다.</p>
+      <p>2. $f$가 균등연속이므로, 코시 수열 $\{x_n\}$의 이미지 $\{f(x_n)\}$도 코시 수열이 된다.</p>
+      <p>3. 실수의 완비성에 의해 $\{f(x_n)\}$은 수렴한다. 이 극한값은 수열의 선택에 무관함을 보일 수 있다.</p>
+      <span class="step-title">[결론]</span> 따라서 $x=0$에서 연속 확장이 가능하며 극한값이 존재한다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    균등연속성을 판정할 때 가장 강력한 '치트키'는 <b>도함수가 유계(Bounded)인가?</b>를 확인하는 것입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 코시의 MVT와 부등식 증명</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #8b5cf6; color:#4338ca;}
+  .lead{
+    font-size:1.1rem; background:#f5f3ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #8b5cf6;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .problem { font-weight: 700; color: #4338ca; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #1e293b; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .highlight { color: #8b5cf6; font-weight: bold; }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>코시의 MVT를 이용한 부등식 증명</h1>
+  <div class="lead">
+    분수 형태의 부등식 $\frac{f(b)-f(a)}{g(b)-g(a)}$가 주어졌을 때, 이를 도함수의 비 $\frac{f'(c)}{g'(c)}$로 치환하여 범위를 제한하는 것이 핵심 전략입니다.
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 1. $0 < a < b < \frac{\pi}{2}$ 일 때, $\frac{\sin b - \sin a}{\cos a - \cos b} = \cot c$ 를 만족하는 $c \in (a, b)$가 존재함을 이용해 부등식을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[전략]</span> $f(x) = \sin x, g(x) = \cos x$로 설정한다.
+      <span class="step-title">[코시 MVT 적용]</span> $[a, b]$에서 다음을 만족하는 $c$가 존재한다.
+      <div class="formula-container">
+        $$\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{\sin b - \sin a}{\cos b - \cos a} = \frac{\cos c}{-\sin c} = -\cot c$$
+      </div>
+      식의 순서를 바꾸면 $\frac{\sin b - \sin a}{\cos a - \cos b} = \cot c$가 된다.
+      <span class="step-title">[부등식 유도]</span> $0 < a < c < b < \pi/2$에서 $\cot x$는 감소함수이므로:
+      <div class="highlight">$$\cot b < \frac{\sin b - \sin a}{\cos a - \cos b} < \cot a$$</div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 2. $0 < a < b$ 일 때, $\frac{e^b - e^a}{\ln b - \ln a}$ 의 범위를 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[설정]</span> $f(x) = e^x, g(x) = \ln x$라 하자.
+      <span class="step-title">[코시 MVT 적용]</span>
+      <div class="formula-container">
+        $$\frac{e^b - e^a}{\ln b - \ln a} = \frac{f'(c)}{g'(c)} = \frac{e^c}{1/c} = c e^c \quad (a < c < b)$$
+      </div>
+      <span class="step-title">[결론]</span> $h(x) = x e^x$는 $x > 0$에서 증가함수이므로:
+      <div class="highlight">$$a e^a < \frac{e^b - e^a}{\ln b - \ln a} < b e^b$$</div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 3. $0 < x < 1$ 일 때, $\frac{\sin x}{x} > \cos x$ 임을 코시 MVT로 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[변형]</span> 증명할 식은 $\frac{\sin x - \sin 0}{x - 0} > \cos x$이다.
+      <span class="step-title">[코시 MVT 적용]</span> $f(t) = \sin t, g(t) = t$에 대해 $[0, x]$에서 적용하면:
+      <div class="formula-container">
+        $$\frac{\sin x - 0}{x - 0} = \frac{\cos c}{1} = \cos c \quad (0 < c < x)$$
+      </div>
+      구간 $(0, 1)$에서 $\cos t$는 감소함수이므로, $c < x$이면 $\cos c > \cos x$이다.
+      <div class="highlight">$$\therefore \frac{\sin x}{x} > \cos x$$</div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 4. $0 < a < b < 1$ 일 때, $\frac{\arcsin b - \arcsin a}{\frac{1}{\sqrt{1-a^2}} - \frac{1}{\sqrt{1-b^2}}}$ 의 부호를 판별하시오.</div>
+    <div class="solution">
+      <span class="step-title">[설정]</span> $f(x) = \arcsin x, g(x) = \frac{1}{\sqrt{1-x^2}}$라 하자.
+      <div class="formula-container">
+        $$f'(x) = \frac{1}{\sqrt{1-x^2}}, \quad g'(x) = \frac{x}{(1-x^2)^{3/2}}$$
+      </div>
+      <span class="step-title">[코시 MVT 적용]</span>
+      <div class="formula-container">
+        $$\frac{\Delta f}{\Delta g} = \frac{f'(c)}{g'(c)} = \frac{1/\sqrt{1-c^2}}{c/(1-c^2)^{3/2}} = \frac{1-c^2}{c} > 0 \quad (\because 0 < c < 1)$$
+      </div>
+      따라서 분자와 분모의 부호는 항상 같다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 5. $x > 0$ 일 때, $\frac{1 - \cos x}{x^2} < \frac{1}{2}$ 임을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[설정]</span> $f(t) = 1 - \cos t, g(t) = t^2$라 하고 $[0, x]$에서 적용한다.
+      <div class="formula-container">
+        $$\frac{(1-\cos x) - (1-\cos 0)}{x^2 - 0^2} = \frac{\sin c}{2c} = \frac{1}{2} \left( \frac{\sin c}{c} \right)$$
+      </div>
+      <span class="step-title">[평가]</span> 모든 $c > 0$에 대해 $\sin c < c$이므로 $\frac{\sin c}{c} < 1$이다.
+      <div class="highlight">$$\therefore \frac{1 - \cos x}{x^2} < \frac{1}{2}$$</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    코시의 평균값 정리는 두 함수의 <b>상대적 속도</b>를 비교함으로써 단일 함수로는 도출하기 어려운 정교한 오차 한계를 찾아내는 데 탁월합니다. <br>
+    © 2026 Advanced Calculus Analysis Series
+  </div>
+</div>
+</body>
+</html>

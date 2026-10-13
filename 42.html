@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 다변수 함수의 극한과 연속</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1d4ed8;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-limit { background:#dbeafe; color:#1e40af; }
+  .tag-cont { background:#dcfce7; color:#166534; }
+  .alert-panel {
+    background:#fef2f2; border-left:5px solid #ef4444; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>다변수 함수의 극한과 연속 (Limits & Continuity)</h1>
+  <div class="lead">
+    일변수 함수와 달리 다변수 함수에서는 한 점으로 접근하는 경로가 무수히 많습니다. 극한이 존재하기 위해서는 <b>어떤 경로로 접근하더라도</b> 동일한 값으로 수렴해야 합니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-limit">Limit of Functions</div>
+      <h2>1. 다변수 함수의 극한</h2>
+      <p>점 $(x, y)$가 $(a, b)$에 접근할 때, 거리 $\sqrt{(x-a)^2 + (y-b)^2}$가 0으로 갈 때의 함숫값을 관찰합니다.</p>
+      
+      <div class="formula-container">
+        $$\lim_{(x,y) \to (a,b)} f(x, y) = L$$
+      </div>
+      
+      <h3>핵심 전략: 극한이 존재하지 않음을 증명</h3>
+      <ul>
+        <li><b>서로 다른 경로:</b> $x$축($y=0$), $y$축($x=0$), 혹은 직선($y=mx$) 경로를 따라 계산한 극한값이 다르면 극한은 존재하지 않습니다.</li>
+        <li><b>고차 경로:</b> 직선 경로에서 같더라도 포물선($y=x^2$) 경로에서 다를 수 있으므로 주의해야 합니다.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-cont">Continuity</div>
+      <h2>2. 다변수 함수의 연속</h2>
+      <p>함수 $f$가 점 $(a, b)$에서 연속이려면 다음 세 조건을 모두 만족해야 합니다.</p>
+      
+      <div class="formula-container">
+        $$\text{1. } f(a, b) \text{ 가 정의됨}$$
+        $$\text{2. } \lim_{(x,y) \to (a,b)} f(x, y) \text{ 가 존재함}$$
+        $$\text{3. } \lim_{(x,y) \to (a,b)} f(x, y) = f(a, b)$$
+      </div>
+      
+      <h3>연속함수의 성질</h3>
+      <ul>
+        <li>다항함수, 유리함수(분모 $\neq 0$), 삼각함수 등은 그 <b>정의역 내에서 항상 연속</b>입니다.</li>
+        <li>연속함수끼리의 합, 차, 곱, 합성 함수 역시 연속입니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>심화 개념: 입실론-델타 논법 ($\epsilon-\delta$)</h2>
+  <div class="box" style="background:#f8fafc;">
+    다변수 극한의 엄밀한 정의는 다음과 같습니다: 모든 $\epsilon > 0$에 대하여, 
+    $0 < \sqrt{(x-a)^2 + (y-b)^2} < \delta$ 이면 $|f(x,y) - L| < \epsilon$ 을 만족하는 $\delta > 0$가 존재한다.
+    <p class="small" style="margin-top:10px;">※ 실제 계산 시에는 <b>샌드위치 정리</b>나 <b>극좌표 변환($x=r\cos\theta, y=r\sin\theta$)</b>을 사용하여 극한의 존재를 증명하는 경우가 많습니다.</p>
+  </div>
+
+  <div class="alert-panel">
+    <strong>주의:</strong> 일변수 함수처럼 단순히 좌극한과 우극한만 비교해서는 안 됩니다. 평면상에서는 "무한한 방향"이 존재하기 때문입니다.
+  </div>
+
+  <div class="footer">
+    다변수 함수의 극한과 연속은 이후 배우게 될 <b>편미분 가능성</b>의 전제 조건이 됩니다. <br>
+    © 2026 Multivariable Analysis Curriculum
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 컴팩트성과 하이네-보렐 정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#1e1b4b;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #6366f1; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eef2ff,#e0e7ff);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#e0e7ff; color:#4338ca;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>컴팩트성 (Compactness)</h1>
+  <div class="lead">
+    컴팩트성은 유클리드 공간의 <b>유계성(Boundedness)</b>과 <b>닫힘(Closedness)</b>을 일반화한 개념입니다. 핵심은 "무한개의 열린 집합으로 덮여 있어도, 그중 유한개만 골라내어 전체를 덮을 수 있다"는 성질에 있습니다.
+  </div>
+
+  <h2>1. 열린 피복과 컴팩트 집합의 정의</h2>
+  <div class="box">
+    <p>집합 $K \subset \mathbb{R}^n$이 <b>컴팩트(Compact)</b>하다는 것은 다음과 같습니다.</p>
+    <blockquote>
+      $K$의 임의의 열린 피복(Open Cover) $\{U_\alpha\}$에 대하여, $K \subset \bigcup_{i=1}^n U_{\alpha_i}$를 만족하는 <b>유한 부분 피복(Finite Subcover)</b>이 항상 존재한다.
+    </blockquote>
+  </div>
+
+  
+
+  <h2>2. 하이네-보렐 정리 (Heine–Borel Theorem)</h2>
+  <p>유클리드 공간 $\mathbb{R}^n$에서 집합이 컴팩트할 필요충분조건을 제시하는 매우 중요한 정리입니다.</p>
+  
+  <div class="formula-container">
+    집합 $K \subset \mathbb{R}^n$ 가 컴팩트하다. $\iff$ $K$ 는 <b>유계(Bounded)</b>이고 <b>닫힌 집합(Closed)</b>이다.
+  </div>
+  
+  <p>※ 주의: 이 정리는 유한 차원 유클리드 공간에서는 성립하지만, 무한 차원 함수 공간(예: $L^p$ 공간)에서는 유계 폐집합이라고 해서 반드시 컴팩트한 것은 아닙니다.</p>
+
+  <h2>3. 컴팩트성의 주요 성질 및 응용</h2>
+  <div class="grid">
+    <div class="box">
+      <div class="tag">Max-Min Theorem</div>
+      <h3>최대-최소 정리</h3>
+      <p>컴팩트 집합 위에서 정의된 <b>연속함수</b>는 반드시 최댓값과 최솟값을 갖는다.</p>
+    </div>
+    <div class="box">
+      <div class="tag">Uniform Continuity</div>
+      <h3>평등 연속성</h3>
+      <p>컴팩트 집합에서 연속인 함수는 그 집합 위에서 <b>평등 연속(Uniformly Continuous)</b>이다.</p>
+    </div>
+  </div>
+
+  <h2>4. 점렬 컴팩트성 (Sequential Compactness)</h2>
+  <div class="box" style="border-left: 5px solid #6366f1;">
+    <p>거리 공간에서 컴팩트성은 점렬 컴팩트성과 동치입니다.</p>
+    <p><b>정의:</b> 집합 $K$ 안의 임의의 수열 $\{x_n\}$이 $K$ 안의 점으로 수렴하는 <b>부분 수열(Subsequence)</b>을 가질 때, $K$를 점렬 컴팩트하다고 합니다.</p>
+    <p class="small">이는 <b>볼차노-바이어슈트라스 정리</b>와 깊은 연관이 있습니다.</p>
+  </div>
+
+  <h2>5. 왜 컴팩트성이 중요한가?</h2>
+  <ul>
+    <li><b>유한성으로의 회귀:</b> 무한한 대상을 다룰 때 유한개의 '창문(Open sets)'만으로 전체를 파악할 수 있게 해줍니다.</li>
+    <li><b>해석학의 정당화:</b> 적분의 존재성, 미분방정식 해의 존재성 등을 증명할 때 '함수의 치역이 흩어지지 않고 모여 있음'을 보장하는 결정적인 근거가 됩니다.</li>
+  </ul>
+
+  <div class="footer">
+    컴팩트성은 해석학을 넘어 위상수학 전체를 관통하는 가장 아름다운 개념 중 하나입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

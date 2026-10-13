@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 그래디언트와 방향도함수</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f43f5e; color:#be123c;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fff1f2,#ffe4e6);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f43f5e;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-grad { background:#ffe4e6; color:#be123c; }
+  .tag-dir { background:#fef3c7; color:#92400e; }
+  .info-panel {
+    background:#f0f9ff; border-left:5px solid #0ea5e9; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>그래디언트와 방향도함수 (Gradient & Directional Derivatives)</h1>
+  <div class="lead">
+    다변수 함수 $f(x, y, z)$가 특정 방향으로 얼마나 빠르게 변하는지 측정합니다. <b>그래디언트</b>는 함수값이 가장 가파르게 증가하는 방향을 가리키는 벡터이며, <b>방향도함수</b>는 임의의 단위 벡터 방향으로의 변화율입니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-grad">Gradient Vector</div>
+      <h2>1. 그래디언트 (勾配)</h2>
+      <p>함수 $f$의 모든 편미분 성분을 원소로 갖는 벡터장입니다. 기호로는 $\nabla f$ (델 에프)라고 읽습니다.</p>
+      
+      <div class="formula-container">
+        $$\nabla f(x, y) = \left\langle \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right\rangle$$
+      </div>
+      
+      <h3>주요 성질</h3>
+      <ul>
+        <li>함수값이 <b>가장 급격히 증가</b>하는 방향을 가리킵니다.</li>
+        <li>그래디언트의 크기 $|\nabla f|$는 그 최대 변화율입니다.</li>
+        <li><b>등위 곡선(Level Curves)</b> 또는 등위 면에 대해 항상 <b>수직(Normal)</b>입니다.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-dir">Directional Derivative</div>
+      <h2>2. 방향도함수</h2>
+      <p>점 $(x_0, y_0)$에서 단위 벡터 $\mathbf{u} = \langle a, b \rangle$ 방향으로의 변화율을 계산합니다.</p>
+      
+      <div class="formula-container">
+        $$D_{\mathbf{u}}f(x, y) = \nabla f(x, y) \cdot \mathbf{u}$$
+      </div>
+      
+      <h3>해석적 의미</h3>
+      <ul>
+        <li>편미분 $f_x, f_y$는 각각 $x$축, $y$축 방향으로의 특수한 방향도함수입니다.</li>
+        <li>$\nabla f$와 $\mathbf{u}$ 사이의 각도를 $\theta$라 할 때, $D_{\mathbf{u}}f = |\nabla f| \cos \theta$가 성립합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>기하학적 응용: 접평면 (Tangent Plane)</h2>
+  <div class="info-panel">
+    곡면 $F(x, y, z) = k$ 위의 점 $P_0(x_0, y_0, z_0)$에서의 <b>접평면 방정식</b>은 그래디언트 벡터를 법선 벡터로 사용하여 다음과 같이 구합니다.
+    <div class="formula-container" style="background:#0c4a6e; margin-top:10px;">
+      $$F_x(P_0)(x-x_0) + F_y(P_0)(y-y_0) + F_z(P_0)(z-z_0) = 0$$
+    </div>
+  </div>
+
+  <h2>요점 정리</h2>
+  <ul>
+    <li><b>최대 증가율:</b> $\mathbf{u}$가 $\nabla f$와 같은 방향일 때 ($D_{\mathbf{u}}f = |\nabla f|$)</li>
+    <li><b>최대 감소율:</b> $\mathbf{u}$가 $\nabla f$와 반대 방향일 때 ($D_{\mathbf{u}}f = -|\nabla f|$)</li>
+    <li><b>변화 없음:</b> $\mathbf{u}$가 $\nabla f$와 수직일 때 ($D_{\mathbf{u}}f = 0$, 즉 등위선을 따라 이동할 때)</li>
+  </ul>
+
+  <div class="footer">
+    그래디언트는 머신러닝의 <b>경사하강법(Gradient Descent)</b> 알고리즘의 수학적 토대가 됩니다. <br>
+    © 2026 Multivariable Calculus Master Series
+  </div>
+</div>
+</body>
+</html>

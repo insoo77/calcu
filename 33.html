@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 리만 적분의 엄밀한 정의</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #0ea5e9; color:#0369a1;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #0ea5e9; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #0ea5e9;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#e0f2fe; color:#0369a1;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>리만 적분의 정의 (Riemann Integral)</h1>
+  <div class="lead">
+    리만 적분은 유계인 폐구간 $[a, b]$에서 정의된 함수 $f$에 대하여, 구간의 <b>분할(Partition)</b>과 <b>표본점(Sample points)</b>의 선택에 따른 합의 극한으로 정의됩니다.
+  </div>
+
+  <h2>1. 분할과 리만 합 (Partition & Riemann Sum)</h2>
+  <p>구간 $[a, b]$의 분할 $P$를 $a = x_0 < x_1 < \dots < x_n = b$라 하고, 각 소구간 $[x_{i-1}, x_i]$에서 임의의 점 $x_i^*$를 선택합니다.</p>
+  
+  <div class="concept-box">
+    <div class="badge">리만 합 (Riemann Sum)</div>
+    <div class="formula-container">
+      $$S(f, P, x_i^*) = \sum_{i=1}^{n} f(x_i^*) \Delta x_i \quad (\Delta x_i = x_i - x_{i-1})$$
+    </div>
+    <p>이때 분할의 크기(Norm) $\|P\|$는 소구간들 중 가장 긴 길이를 의미합니다: $\|P\| = \max(\Delta x_i)$.</p>
+  </div>
+
+  
+
+  <h2>2. 정적분의 엄밀한 정의</h2>
+  <p>모든 $\epsilon > 0$에 대하여 적절한 $\delta > 0$가 존재하여, $\|P\| < \delta$를 만족하는 <b>임의의 분할 $P$와 임의의 표본점 $x_i^*$</b>에 대해 다음이 성립할 때 $f$는 $[a, b]$에서 리만 적분 가능하다고 합니다.</p>
+  
+  <div class="formula-container" style="background:#0c4a6e;">
+    $$\left| \sum_{i=1}^{n} f(x_i^*) \Delta x_i - I \right| < \epsilon$$
+  </div>
+  <p>이 극한값 $I$를 $I = \int_a^b f(x) dx$라고 씁니다.</p>
+
+  <h2>3. 다르부 상적분과 하적분 (Darboux Integrals)</h2>
+  <p>리만 합의 극한을 계산하기 어려운 경우, 함수의 상한($M_i$)과 하한($m_i$)을 이용한 다르부 합을 통해 가적분성을 판정합니다.</p>
+  
+  <div class="concept-box">
+    <ul>
+      <li><b>상적분:</b> 모든 분할에 대한 상합($U(f, P)$)의 하한
+        $$\overline{\int_a^b} f(x) dx = \inf \{ U(f, P) \mid P \text{ is a partition} \}$$
+      </li>
+      <li><b>하적분:</b> 모든 분할에 대한 하합($L(f, P)$)의 상한
+        $$\underline{\int_a^b} f(x) dx = \sup \{ L(f, P) \mid P \text{ is a partition} \}$$
+      </li>
+    </ul>
+    <p><b>핵심:</b> 상적분과 하적분이 일치할 때에만 리만 적분이 정의됩니다.</p>
+  </div>
+
+  
+
+  <h2>4. 리만 적분 가능성의 성질</h2>
+  <ul>
+    <li><b>선형성:</b> $\int (af + bg) = a\int f + b\int g$</li>
+    <li><b>구간 가법성:</b> $\int_a^b f = \int_a^c f + \int_c^b f$</li>
+    <li><b>단조성:</b> $f \le g$ 이면 $\int f \le \int g$</li>
+  </ul>
+
+  <div class="footer">
+    리만 적분의 정의는 <b>불연속점이 매우 많은 함수</b>(예: 디리클레 함수)를 다루지 못한다는 한계가 있으며, 이는 훗날 <b>르베그 적분</b>의 탄생 배경이 됩니다. <br>
+    © 2026 Analysis and Calculus Series
+  </div>
+</div>
+</body>
+</html>

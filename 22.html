@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 롤의 정리를 이용한 실근 유일성 증명</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#312e81;}
+  .lead{
+    font-size:1.1rem; background:#f1f5f9; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .problem { font-weight: 700; color: #4338ca; font-size: 1.15rem; margin-bottom: 15px; }
+  .proof { background: #fdfdfd; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #1e293b; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>실근의 유일성 증명 예제 (Using Rolle's Theorem)</h1>
+  <div class="lead">
+    방정식 $f(x)=0$의 실근이 <b>오직 하나</b>임을 증명하려면 두 단계를 거칩니다.<br>
+    1. <b>사잇값 정리:</b> 실근이 적어도 하나 존재함을 보임.<br>
+    2. <b>롤의 정리:</b> 실근이 두 개라고 가정했을 때 $f'(c)=0$인 점이 생기는데, 이것이 모순임을 보임.
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 1. 다항방정식 $x^3 + 3x + 1 = 0$ 은 오직 하나의 실근을 가짐을 보이시오.</div>
+    <div class="proof">
+      <span class="step-title">[존재성]</span> $f(0)=1, f(-1)=-3$이다. $f(x)$는 연속이므로 사잇값 정리에 의해 $(-1, 0)$ 사이에 적어도 하나의 실근이 존재한다.
+      <span class="step-title">[유일성]</span> $f(x)=0$이 서로 다른 두 실근 $a, b$를 가진다고 가정하자. 롤의 정리에 의해 $f'(c)=0$인 $c \in (a, b)$가 존재해야 한다. 그러나
+      <div class="formula-container">$$f'(x) = 3x^2 + 3 > 0 \quad (\text{모든 } x \text{에 대해})$$</div>
+      $f'(x)$는 결코 $0$이 될 수 없으므로 모순이다. 따라서 실근은 유일하다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 2. 방정식 $x - \cos x = 0$ 의 실근이 유일함을 보이시오.</div>
+    <div class="proof">
+      <span class="step-title">[존재성]</span> $f(0)=-1, f(\pi)=\pi+1$이다. 연속함수 $f$는 $(0, \pi)$에서 적어도 하나의 실근을 가진다.
+      <span class="step-title">[유일성]</span> $f(x)=0$이 두 실근을 가진다고 가정하면 롤의 정리에 의해 $f'(c)=0$인 $c$가 존재해야 한다.
+      <div class="formula-container">$$f'(x) = 1 + \sin x$$</div>
+      $\sin x = -1$일 때 $f'(x)=0$이 될 수 있지만, $x$가 구간 $(a, b)$ 내에 존재해야 하며 $f(x)$는 도함수가 0이 되는 점을 제외하면 항상 증가하므로 두 번 만날 수 없다. 엄밀히는 $f'(x) \ge 0$이며 $f'(x)=0$인 점이 고립되어 있으므로 $f$는 엄격한 증가함수이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 3. $x^5 + x^3 + x - 5 = 0$ 이 오직 하나의 실근을 가짐을 보이시오.</div>
+    <div class="proof">
+      <span class="step-title">[존재성]</span> $f(1)=-2, f(2)=32+8+2-5=37$이므로 $(1, 2)$ 사이에 근이 존재한다.
+      <span class="step-title">[유일성]</span> 두 실근이 존재한다고 가정하면 롤의 정리에 의해 $f'(c)=0$이어야 한다.
+      <div class="formula-container">$$f'(x) = 5x^4 + 3x^2 + 1$$</div>
+      $x^4 \ge 0, x^2 \ge 0$이므로 $f'(x) \ge 1$이다. 즉, $f'(x)$는 절대 $0$이 될 수 없으므로 실근은 단 하나뿐이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 4. $e^x = 1 - x$ 의 실근이 $x=0$ 뿐임을 보이시오.</div>
+    <div class="proof">
+      <span class="step-title">[확인]</span> $x=0$을 대입하면 $e^0 = 1, 1-0 = 1$이므로 $x=0$은 근이다.
+      <span class="step-title">[유일성]</span> $f(x) = e^x + x - 1 = 0$이라 하자. $x=0$ 외에 또 다른 실근 $a$가 존재한다고 가정하면 $[0, a]$(또는 $[a, 0]$)에서 롤의 정리에 의해 $f'(c)=0$인 $c$가 존재해야 한다.
+      <div class="formula-container">$$f'(x) = e^x + 1$$</div>
+      $e^x$는 항상 양수이므로 $f'(x) > 1$이다. 따라서 $f'(c)=0$은 불가능하며, $x=0$이 유일한 실근이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 5. $2x + \sin x = 0$ 의 실근이 $x=0$ 뿐임을 보이시오.</div>
+    <div class="proof">
+      <span class="step-title">[확인]</span> $f(0) = 0 + \sin 0 = 0$이므로 $0$은 근이다.
+      <span class="step-title">[유일성]</span> 또 다른 근 $a \neq 0$이 존재한다고 가정하면, $0$과 $a$ 사이에서 롤의 정리에 의해 $f'(c)=0$인 $c$가 존재해야 한다.
+      <div class="formula-container">$$f'(x) = 2 + \cos x$$</div>
+      $\cos x$의 최솟값은 $-1$이므로 $f'(x) \ge 2 - 1 = 1$이다. 도함수가 항상 양수이므로 $0$이 될 수 없고, 따라서 추가적인 실근은 존재하지 않는다.
+    </div>
+  </div>
+
+  <div class="footer">
+    이 증명 기법은 <b>부동점 정리</b>나 <b>뉴턴 방법</b>의 수렴성 증명 등 해석학 전반에서 광범위하게 사용됩니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

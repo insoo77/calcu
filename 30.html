@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 고계 도함수</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #14b8a6; color:#0d9488;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #14b8a6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #14b8a6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#f0fdfa; color:#0d9488;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>고계 도함수 (Higher-Order Derivatives)</h1>
+  <div class="lead">
+    고계 도함수는 함수 $f$를 여러 번 미분하여 얻은 도함수들을 의미합니다. 일계 도함수가 <b>기울기</b>를 나타낸다면, 이계 도함수는 <b>곡률(오목과 볼록)</b>을, 그 이상의 도함수들은 함수의 더욱 정교한 성질을 설명합니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag">Definition & Notation</div>
+      <h2>1. 정의와 표기법</h2>
+      <p>함수 $f$를 $n$번 미분한 것을 $n$계 도함수라고 하며, 다음과 같이 표기합니다.</p>
+      
+      <div class="formula-container">
+        $$f^{(n)}(x) = \frac{d^n y}{dx^n} = \frac{d}{dx}\left(f^{(n-1)}(x)\right)$$
+      </div>
+      <ul>
+        <li>$f'(x)$: 일계 도함수 (기울기)</li>
+        <li>$f''(x)$: 이계 도함수 (가속도/곡률)</li>
+        <li>$f^{(n)}(x)$: $n$계 도함수</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag">Geometric Meaning</div>
+      <h2>2. 기하학적 의미</h2>
+      <p>이계 도함수 $f''(x)$는 곡선의 모양을 결정짓는 핵심 지표입니다.</p>
+      
+      <ul>
+        <li><b>$f''(x) > 0$:</b> 아래로 볼록 (Concave Up)</li>
+        <li><b>$f''(x) < 0$:</b> 위로 볼록 (Concave Down)</li>
+        <li><b>변곡점 (Inflection Point):</b> $f''(x)$의 부호가 바뀌는 지점</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>3. 라이프니츠의 고계 도함수 공식</h2>
+  <div class="box" style="border-left: 5px solid #14b8a6;">
+    <p>두 함수의 곱 $(uv)$의 $n$계 도함수는 이항 정리와 유사한 구조를 가집니다.</p>
+    <div class="formula-container">
+      $$(uv)^{(n)} = \sum_{k=0}^{n} \binom{n}{k} u^{(n-k)} v^{(k)}$$
+    </div>
+    <p class="small">※ 이 공식은 다항식과 지수함수의 곱 등을 여러 번 미분할 때 매우 효율적입니다.</p>
+  </div>
+
+  <h2>4. 주요 응용 분야</h2>
+  
+  <ul>
+    <li><b>테일러 급수 (Taylor Series):</b> 함수를 고계 도함수들의 합으로 근사하여 다항식 형태로 나타냅니다.</li>
+    <li><b>최적화 문제:</b> 이계 도함수 판정법을 통해 극대값과 극소값을 엄밀히 구분합니다.</li>
+    <li><b>물리학:</b> 위치를 시간에 대해 미분하면 속도, 속도를 미분하면 가속도, 가속도를 미분하면 가속도의 변화율(Jerk)이 됩니다.</li>
+  </ul>
+
+  <div class="footer">
+    고계 도함수는 함수가 단순히 '어디로 가는지'를 넘어 '어떻게 변하고 있는지'를 입체적으로 보여줍니다. <br>
+    © 2026 Advanced Calculus Analysis Series
+  </div>
+</div>
+</body>
+</html>

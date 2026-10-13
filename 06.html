@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 수열의 극한 엄밀한 정의</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#78350f;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #f59e0b; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#fef3c7; color:#92400e;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>수열의 극한: $\epsilon-N$ 정의</h1>
+  <div class="lead">
+    수열 $\{a_n\}$이 $L$로 수렴한다는 것은, 아무리 작은 오차 범위($\epsilon$)를 가져오더라도 <b>특정 시점($N$) 이후의 모든 항</b>이 그 범위 안에 들어온다는 뜻입니다.
+  </div>
+
+  <h2>1. 수학적 정의</h2>
+  <div class="concept-card">
+    <p>수열 $\{a_n\}$이 실수 $L$로 <b>수렴(Converge)</b>한다는 것은 다음 조건을 만족함을 의미합니다.</p>
+    <div class="formula-container">
+      $$\forall \epsilon > 0, \exists N \in \mathbb{N} \quad \text{s.t.} \quad n \ge N \implies |a_n - L| < \epsilon$$
+    </div>
+    <p>이때 $L$을 수열 $\{a_n\}$의 <b>극한(Limit)</b>이라고 하며, $\lim_{n \to \infty} a_n = L$로 표기합니다.</p>
+  </div>
+
+  
+
+  <h2>2. 정의의 기호별 의미</h2>
+  <ul>
+    <li><b>$\forall \epsilon > 0$:</b> 적(Opponent)이 던지는 "요구하는 정밀도"입니다. "차이를 0.0001보다 작게 만들어봐"라는 공격입니다.</li>
+    <li><b>$\exists N \in \mathbb{N}$:</b> 우리가 찾아야 하는 "충분히 큰 번호"입니다. 이 번호는 보통 $\epsilon$에 따라 결정됩니다 ($N(\epsilon)$).</li>
+    <li><b>$n \ge N$:</b> 수열의 꼬리(Tail) 부분입니다. 극한은 앞부분 몇 개 항이 어떠하든 상관없이 <b>결국(Eventually)</b> 벌어지는 일을 다룹니다.</li>
+    <li><b>$|a_n - L| < \epsilon$:</b> $a_n$이 $L$의 $\epsilon$-근방($\epsilon$-neighborhood) 안에 갇히게 됨을 뜻합니다.</li>
+  </ul>
+
+  <h2>3. 증명의 전형적인 절차</h2>
+  <div class="concept-card" style="border-left: 5px solid #f59e0b;">
+    <div class="badge">Proof Strategy</div>
+    <ol>
+      <li><b>예비 분석:</b> $|a_n - L| < \epsilon$ 식을 정리하여 $n > (\text{something involving } \epsilon)$ 형태를 유도합니다.</li>
+      <li><b>$N$ 선택:</b> 위에서 구한 식을 만족하는 자연수 $N$을 잡습니다. (아르키메데스 성질 활용)</li>
+      <li><b>본 증명:</b> "임의의 $\epsilon > 0$에 대하여 $N$을 ~로 잡으면, $n \ge N$일 때 $|a_n - L| < \dots < \epsilon$이 성립한다"라고 서술합니다.</li>
+    </ol>
+  </div>
+
+  <h2>4. 수열의 극한 성질</h2>
+  <p>$\epsilon-N$ 정의를 통해 다음의 성질들을 엄밀히 증명할 수 있습니다.</p>
+  <ul>
+    <li><b>유일성:</b> 수렴하는 수열의 극한값은 유일하다.</li>
+    <li><b>유계성:</b> 수렴하는 수열은 반드시 유계(Bounded)이다. (역은 성립하지 않음)</li>
+    <li><b>보존성:</b> $a_n \to L, b_n \to M$이면 $a_n + b_n \to L + M$이다.</li>
+  </ul>
+
+  
+
+  <h2>5. 발산의 정의 (Divergence to $\infty$)</h2>
+  <p>무한대로 발산하는 경우 역시 엄밀하게 정의할 수 있습니다.</p>
+  <div class="formula-container" style="background:#451a03;">
+    $$\forall M > 0, \exists N \in \mathbb{N} \quad \text{s.t.} \quad n \ge N \implies a_n > M$$
+  </div>
+  <p>아무리 큰 수 $M$을 가져와도 수열의 항이 이를 넘어서는 시점이 존재한다는 뜻입니다.</p>
+
+  <div class="footer">
+    $\epsilon-N$ 논법은 직관을 논리로 정제하는 과정입니다. 이 산을 넘으면 코시 수열과 완비성의 세계가 열립니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

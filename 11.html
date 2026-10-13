@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 함수 극한의 엄밀한 정의</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#1e1b4b;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #6366f1; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eef2ff,#e0e7ff);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#e0e7ff; color:#4338ca;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>함수 극한의 엄밀한 정의 ($\epsilon-\delta$ Definition)</h1>
+  <div class="lead">
+    극한 $\lim_{x \to c} f(x) = L$의 의미는 "함숫값 $f(x)$를 $L$에 원하는 만큼($\epsilon$) 가깝게 만들고 싶을 때, $x$를 $c$에 충분히($\delta$) 가깝게 제한할 수 있다"는 뜻입니다.
+  </div>
+
+  <h2>1. 수학적 정의</h2>
+  <div class="concept-box">
+    <p>함수 $f$가 점 $c$를 포함하는 열린 구간(단, $c$는 제외 가능)에서 정의되어 있을 때, <b>$\lim_{x \to c} f(x) = L$</b>임은 다음을 만족함을 의미합니다.</p>
+    <div class="formula-container">
+      $$\forall \epsilon > 0, \exists \delta > 0 \quad \text{s.t.} \quad 0 < |x - c| < \delta \implies |f(x) - L| < \epsilon$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 정의의 구성 요소 해석</h2>
+  <ul>
+    <li><b>$\forall \epsilon > 0$ (임의의 양수 입실론):</b> 상대방이 제시하는 "허용 오차"입니다. 아무리 작은 값을 가져와도 대응할 수 있어야 합니다.</li>
+    <li><b>$\exists \delta > 0$ (존재하는 양수 델타):</b> 우리가 찾아야 하는 "정의역의 거리"입니다. 이 값은 대개 $\epsilon$에 의존합니다 ($\delta = \delta(\epsilon)$).</li>
+    <li><b>$0 < |x - c| < \delta$:</b> $x$가 $c$와 <b>일치하지 않으면서</b>(극한의 본질) $c$로부터 $\delta$ 거리 안에 있음을 뜻합니다.</li>
+    <li><b>$|f(x) - L| < \epsilon$:</b> 결과적으로 함숫값이 목표치 $L$로부터 오차 범위 $\epsilon$ 안에 들어오게 됩니다.</li>
+  </ul>
+
+  <h2>3. 논리적 흐름 (Game Theory Perspective)</h2>
+  <div class="concept-box" style="border-left: 5px solid #6366f1;">
+    <div class="badge">Challenge & Response</div>
+    <ol>
+      <li><b>Challenge:</b> 누군가 "함숫값과 $L$의 차이를 $0.001(\epsilon)$보다 작게 만들 수 있어?"라고 묻습니다.</li>
+      <li><b>Response:</b> 우리는 "$x$를 $c$로부터 $0.0001(\delta)$ 이내로만 잡아봐. 그러면 무조건 성공이야"라고 답합니다.</li>
+      <li><b>Universal Victory:</b> 이 대화가 <b>모든</b> $\epsilon > 0$에 대해 가능하다면, 극한값은 $L$이 됩니다.</li>
+    </ol>
+  </div>
+
+  <h2>4. 극한이 존재하지 않음을 증명 (Negation)</h2>
+  <p>극한이 $L$이 아님을 보이려면 정의의 부정문을 사용합니다.</p>
+  <div class="formula-container" style="background:#2d3748;">
+    $$\exists \epsilon > 0 \quad \text{s.t.} \quad \forall \delta > 0, \quad \exists x \quad \text{s.t.} \quad (0 < |x - c| < \delta \text{ and } |f(x) - L| \ge \epsilon)$$
+  </div>
+  <p>즉, 아무리 $x$를 $c$에 가깝게 붙여도 오차 $\epsilon$ 밖으로 튀어나가는 $x$가 항상 존재함을 보이면 됩니다.</p>
+
+  <h2>5. 예제: $\lim_{x \to 3} (2x - 1) = 5$ 증명</h2>
+  <div class="concept-box">
+    <p><b>Step 1:</b> $|(2x - 1) - 5| < \epsilon$을 만족하는 $\delta$ 찾기</p>
+    <p>$|2x - 6| < \epsilon \iff 2|x - 3| < \epsilon \iff |x - 3| < \frac{\epsilon}{2}$</p>
+    <p><b>Step 2:</b> $\delta = \frac{\epsilon}{2}$로 선택</p>
+    <p><b>Step 3:</b> $0 < |x - 3| < \delta$ 이면 $|(2x-1)-5| = 2|x-3| < 2\delta = 2(\frac{\epsilon}{2}) = \epsilon$이 성립함.</p>
+  </div>
+
+  <div class="footer">
+    $\epsilon-\delta$ 정의는 미적분학의 직관을 논리학의 반열로 올린 코시(Cauchy)와 바이어슈트라스(Weierstrass)의 업적입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

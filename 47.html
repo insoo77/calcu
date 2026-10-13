@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 벡터 해석의 3대 정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f1f5f9; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 40px rgba(0,0,0,.1);
+  }
+  h1{font-size:2.5rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.8rem; margin-top:40px; padding-bottom:10px; border-bottom:4px solid #3b82f6; color:#1d4ed8;}
+  h3{font-size:1.3rem; color:#0f172a; margin-top:30px; background:#f8fafc; padding:8px 12px; border-radius:8px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:25px; border-radius:15px; margin-bottom:30px; text-align:center;
+  }
+  .formula-box{
+    background:#0f172a; color:#f8fafc; padding:25px; border-radius:15px;
+    margin:20px 0; overflow-x:auto; border-left:8px solid #3b82f6;
+  }
+  .concept-card{
+    border:1px solid #e2e8f0; border-radius:16px; padding:20px; margin:20px 0;
+    background:#ffffff; transition: transform 0.2s;
+  }
+  .concept-card:hover { transform: translateY(-5px); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+  .tag{
+    display:inline-block; padding:4px 12px; border-radius:6px; font-weight:bold;
+    font-size:0.9rem; margin-bottom:10px;
+  }
+  .tag-green{background:#dcfce7; color:#166534;}
+  .tag-blue{background:#dbeafe; color:#1e40af;}
+  .tag-red{background:#fee2e2; color:#991b1b;}
+  .comparison-table {
+    width: 100%; border-collapse: collapse; margin-top: 20px;
+  }
+  .comparison-table th, .comparison-table td {
+    border: 1px solid #e2e8f0; padding: 15px; text-align: left;
+  }
+  .comparison-table th { background: #f8fafc; }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#64748b; border-top:1px solid #e2e8f0;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>벡터 해석의 핵심 정리</h1>
+  <div class="lead">
+    그린 정리, 스토크스 정리, 발산 정리는 모두 <b>"영역 내부의 변화량의 총합은 그 경계에서의 흐름과 같다"</b>는 <br>미적분학의 기본 정리(FTC)를 고차원으로 확장한 형태입니다.
+  </div>
+
+  <div class="concept-card">
+    <div class="tag tag-green">2D Plane: Boundary vs Region</div>
+    <h2>1. 그린 정리 (Green's Theorem)</h2>
+    <p>평면상의 닫힌 경로 $C$를 따라 벡터장 $\mathbf{F} = \langle P, Q \rangle$를 선적분한 결과는 그 경로가 둘러싼 평면 영역 $D$에서의 수직 회전 성분의 이중적분과 같습니다.</p>
+    <div class="formula-box">
+      $$\oint_C (P dx + Q dy) = \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dA$$
+    </div>
+    
+    <p><b>물리적 의미:</b> 경로를 따라 수행한 일(Work)은 영역 내부의 미소 회전(Vorticity)들의 총합과 같습니다.</p>
+  </div>
+
+  <div class="concept-card">
+    <div class="tag tag-blue">3D Space: Surface vs Curve</div>
+    <h2>2. 스토크스 정리 (Stokes' Theorem)</h2>
+    <p>그린 정리의 3차원 확장판입니다. 임의의 곡면 $S$의 경계 곡선 $C$를 따라 벡터장 $\mathbf{F}$를 선적분한 것은, 그 곡면 위에서 벡터장의 회전(Curl)을 면적분한 것과 같습니다.</p>
+    <div class="formula-box">
+      $$\oint_C \mathbf{F} \cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}$$
+    </div>
+    
+    <p><b>물리적 의미:</b> 울타리(경로)를 따라 도는 속도의 합은 울타리 안쪽 마당(곡면) 전체에서 발생하는 소용돌이의 총합과 같습니다.</p>
+  </div>
+
+  <div class="concept-card">
+    <div class="tag tag-red">3D Space: Volume vs Surface</div>
+    <h2>3. 발산 정리 (Divergence Theorem)</h2>
+    <p>가우스 정리라고도 불리며, 닫힌 곡면 $S$를 통해 빠져나가는 벡터장의 총 유속(Flux)은 그 곡면이 둘러싼 입체 $E$ 내부에서의 발산(Divergence)의 삼중적분과 같습니다.</p>
+    <div class="formula-box">
+      $$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iiint_E (\nabla \cdot \mathbf{F}) dV$$
+    </div>
+    
+    <p><b>물리적 의미:</b> 경계면을 통해 나가는 알짜 유량은 내부에서 얼마나 많은 '샘(Source)'이나 '싱크(Sink)'가 있는지를 나타냅니다.</p>
+  </div>
+
+  <h2>요약 및 비교</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>정리 이름</th>
+        <th>차원</th>
+        <th>관계성 (Boundary $\to$ Interior)</th>
+        <th>핵심 연산자</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>그린 정리</b></td>
+        <td>2D</td>
+        <td>선적분 (Line) $\leftrightarrow$ 이중적분 (Area)</td>
+        <td>2D Curl ($\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}$)</td>
+      </tr>
+      <tr>
+        <td><b>스토크스 정리</b></td>
+        <td>3D</td>
+        <td>선적분 (Line) $\leftrightarrow$ 면적분 (Surface)</td>
+        <td>$\nabla \times \mathbf{F}$ (Curl)</td>
+      </tr>
+      <tr>
+        <td><b>발산 정리</b></td>
+        <td>3D</td>
+        <td>면적분 (Surface) $\leftrightarrow$ 삼중적분 (Volume)</td>
+        <td>$\nabla \cdot \mathbf{F}$ (Divergence)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    이 정리들은 전자기학(맥스웰 방정식), 유체역학, 일반 상대성 이론 등 현대 물리학의 언어를 구성하는 핵심 도구입니다. <br>
+    <b>Vector Calculus Master Class</b>
+  </div>
+</div>
+</body>
+</html>

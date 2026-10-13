@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 평균값 정리 (MVT)</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e3a8a;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #3b82f6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dbeafe; color:#1e3a8a;
+  }
+  .info-panel {
+    background:#f0fdf4; border-left:5px solid #22c55e; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>평균값 정리 (Mean Value Theorem)</h1>
+  <div class="lead">
+    평균값 정리는 구간의 <b>평균 변화율</b>과 일치하는 <b>순간 변화율</b>을 갖는 점이 구간 내부에 존재함을 보장합니다. 이는 롤의 정리를 일반화한 형태입니다.
+  </div>
+
+  <h2>1. 정리의 정의 및 조건</h2>
+  <p>함수 $f$가 다음 두 조건을 만족해야 합니다.</p>
+  <ul>
+    <li>닫힌 구간 $[a, b]$에서 <b>연속</b></li>
+    <li>열린 구간 $(a, b)$에서 <b>미분 가능</b></li>
+  </ul>
+  <p>이때, 다음 식을 만족하는 $c$가 $(a, b)$ 내에 적어도 하나 존재합니다.</p>
+  
+  <div class="formula-container">
+    $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+  </div>
+
+  
+
+  <h2>2. 기하학적 및 물리적 의미</h2>
+  <div class="grid">
+    <div class="box">
+      <div class="tag">Geometric</div>
+      <h3>평행한 접선</h3>
+      <p>두 끝점 $(a, f(a))$와 $(b, f(b))$를 잇는 할선(secant line)과 평행한 접선이 곡선 위에 적어도 하나 존재함을 의미합니다.</p>
+    </div>
+    <div class="box">
+      <div class="tag">Physical</div>
+      <h3>평균 속도와 순간 속도</h3>
+      <p>어떤 차가 1시간 동안 100km를 달렸다면(평균 속도 100km/h), 주행 도중 속도계가 정확히 100km/h를 가리켰던 순간이 최소한 한 번은 있었다는 뜻입니다.</p>
+    </div>
+  </div>
+
+  <h2>3. 증명의 핵심 아이디어</h2>
+  <div class="box" style="border-left: 5px solid #3b82f6;">
+    <p>평균값 정리는 <b>롤의 정리</b>를 이용하여 증명합니다.</p>
+    <ol>
+      <li>할선의 방정식을 $L(x)$라 하고, 보조 함수 $h(x) = f(x) - L(x)$를 정의합니다.</li>
+      <li>이 함수 $h(x)$는 $h(a) = 0$이고 $h(b) = 0$입니다. (양 끝점의 높이가 같음)</li>
+      <li><b>롤의 정리</b>에 의해 $h'(c) = 0$인 $c$가 존재합니다.</li>
+      <li>$h'(c) = f'(c) - L'(c) = 0$이므로, $f'(c)$는 할선의 기울기와 같아집니다.</li>
+    </ol>
+  </div>
+
+  <h2>4. 주요 따름정리 (Corollaries)</h2>
+  <div class="info-panel">
+    <strong>1. 상수함수 판정:</strong> 모든 $x$에 대해 $f'(x) = 0$이면, $f$는 상수함수입니다.
+    <br><br>
+    <strong>2. 도함수가 같은 함수:</strong> 모든 $x$에 대해 $f'(x) = g'(x)$이면, $f(x) = g(x) + C$입니다.
+    <br><br>
+    <strong>3. 증가/감소 판정:</strong> $f'(x) > 0$이면 $f$는 증가하고, $f'(x) < 0$이면 $f$는 감소합니다.
+  </div>
+
+  <h2>5. 코시의 평균값 정리 (Generalized MVT)</h2>
+  <p>두 함수 $f, g$에 대하여 매개변수 곡선 형태의 평균값 정리를 적용한 것입니다.</p>
+  <div class="formula-container" style="background:#0f172a;">
+    $$\frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}$$
+  </div>
+  <p class="small">※ 이 정리는 <b>로피탈의 정리(L'Hôpital's Rule)</b>를 증명하는 근거가 됩니다.</p>
+
+  <div class="footer">
+    평균값 정리는 미분학의 '존재 정리' 중 가장 강력하며, 테일러 정리의 1차 형태이기도 합니다. <br>
+    © 2026 Advanced Calculus Educational Series
+  </div>
+</div>
+</body>
+</html>

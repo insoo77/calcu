@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 토매 함수와 리만 가적분성</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#065f46;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #10b981; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dcfce7; color:#166534;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>토매 함수 (Thomae's Function)</h1>
+  <div class="lead">
+    팝콘 함수(Popcorn function) 또는 별자리 함수라고도 불리는 토매 함수는 <b>무리수에서는 연속이지만 모든 유리수에서는 불연속</b>인 함수입니다. 디리클레 함수와 달리 이 함수는 <b>리만 적분이 가능</b>합니다.
+  </div>
+
+  <h2>1. 함수의 정의</h2>
+  <p>구간 $(0, 1]$ 위에서 정의되는 토매 함수 $f(x)$는 다음과 같이 정의됩니다.</p>
+  
+  <div class="formula-container">
+    $$f(x) = \begin{cases} \frac{1}{q} & \text{if } x = \frac{p}{q} \in \mathbb{Q} \text{ (기약분수, } q>0) \\ 0 & \text{if } x \in \mathbb{R} \setminus \mathbb{Q} \text{ (무리수)} \end{cases}$$
+  </div>
+
+  
+
+  <h2>2. 불연속성과 연속성</h2>
+  <div class="concept-box">
+    <h3>유리수에서의 불연속 ($x \in \mathbb{Q}$)</h3>
+    <p>어떤 유리수 $a$에 대해 $f(a) = 1/q > 0$이지만, $a$ 근처에는 항상 $f(x)=0$인 무리수가 조밀하게 존재하므로 극한값과 함숫값이 달라 불연속입니다.</p>
+    
+    <h3>무리수에서의 연속 ($x \notin \mathbb{Q}$)</h3>
+    <p>무리수 $x$ 근처에서 분모 $q$가 작은 유리수의 개수는 유한합니다. 따라서 $x$에 충분히 가까이 다가가면 모든 유리수의 함숫값 $1/q$를 임의의 $\epsilon$보다 작게 만들 수 있어 <b>연속</b>이 됩니다.</p>
+  </div>
+
+  <h2>3. 리만 가적분성의 증명</h2>
+  <p>디리클레 함수는 상합과 하합의 차이를 줄일 수 없었지만, 토매 함수는 가능합니다.</p>
+  
+  <div class="concept-box" style="border-left: 5px solid #3b82f6;">
+    <div class="badge" style="background:#dbeafe; color:#1e40af;">Proof Sketch</div>
+    <ol>
+      <li>임의의 $\epsilon > 0$에 대해, $f(x) \ge \epsilon/2$를 만족하는 $x$는 분모가 $2/\epsilon$ 이하인 유리수들뿐이며, 이는 <b>유한개</b>입니다.</li>
+      <li>이 유한개의 점들을 아주 좁은 폭의 구간들로 덮어 상합에 기여하는 크기를 $\epsilon/2$ 미만으로 조절합니다.</li>
+      <li>나머지 영역에서는 $f(x) < \epsilon/2$이므로 전체 상합 $U(f, P)$을 $\epsilon$보다 작게 만들 수 있습니다.</li>
+      <li>하합 $L(f, P)$은 무리수의 존재로 항상 0이므로, 상합과 하합의 차를 임의로 줄일 수 있어 <b>리만 적분 가능</b>합니다.</li>
+    </ol>
+    <div class="formula-container" style="background:#1e293b;">
+      $$\int_0^1 f(x) dx = 0$$
+    </div>
+  </div>
+
+  <h2>4. 르베그의 조건과 결론</h2>
+  <div class="concept-box" style="background:#f8fafc;">
+    <p><b>르베그의 가적분성 정리</b>에 따르면, 유계 함수가 리만 가적분일 조건은 불연속점 집합의 측도가 0인 것입니다.</p>
+    <ul>
+      <li>토매 함수의 불연속점 집합은 유리수 집합($\mathbb{Q}$)입니다.</li>
+      <li>유리수 집합은 가산 집합이므로 <b>측도가 0</b>입니다.</li>
+      <li>따라서 토매 함수는 리만 적분이 가능하며 그 값은 0입니다.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    토매 함수는 "거의 모든 곳에서 연속"인 함수가 리만 적분의 틀 안에서 어떻게 다루어지는지를 보여주는 완벽한 예시입니다. <br>
+    © 2026 Advanced Real Analysis Series
+  </div>
+</div>
+</body>
+</html>

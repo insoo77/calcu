@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 로피탈의 정리 유형별 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#92400e;}
+  .lead{
+    font-size:1.1rem; background:#fffbeb; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .type-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fef3c7; color:#b45309;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #b45309; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>로피탈의 정리 실전 예제 (Indeterminate Forms)</h1>
+  <div class="lead">
+    로피탈의 정리는 $\frac{0}{0}$ 또는 $\frac{\infty}{\infty}$ 꼴에서 직접 적용 가능하며, 그 외의 부정형($0 \cdot \infty, \infty - \infty, 1^\infty$ 등)은 적절한 변형을 통해 분수 형태로 만들어야 합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 1. 기본형 (0/0)</div>
+    <div class="problem">예제 1. $\lim_{x \to 0} \frac{e^x - 1 - x}{x^2}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[판정]</span> $x \to 0$일 때 분자 $\to 0$, 분모 $\to 0$이므로 로피탈 적용 가능.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{e^x - 1 - x}{x^2} \overset{L'H}{=} \lim_{x \to 0} \frac{e^x - 1}{2x}$$
+      </div>
+      <span class="step-title">[재판정]</span> 여전히 $0/0$ 꼴이므로 한 번 더 미분한다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{e^x - 1}{2x} \overset{L'H}{=} \lim_{x \to 0} \frac{e^x}{2} = \frac{1}{2}$$
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 2. 무한대 비율 (∞/∞)</div>
+    <div class="problem">예제 2. $\lim_{x \to \infty} \frac{\ln x}{\sqrt[n]{x}}$ (단, $n > 0$) 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[판정]</span> $x \to \infty$일 때 $\infty/\infty$ 꼴이다.
+      <div class="formula-container">
+        $$\lim_{x \to \infty} \frac{\ln x}{x^{1/n}} \overset{L'H}{=} \lim_{x \to \infty} \frac{1/x}{\frac{1}{n}x^{\frac{1}{n}-1}} = \lim_{x \to \infty} \frac{n}{x^{1/n}}$$
+      </div>
+      <span class="step-title">[결과]</span> 분모가 무한히 커지므로 극한값은 **0**이다. (다항함수가 로그함수보다 빠르게 증가함을 증명)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 3. 곱셈 부정형 (0 · ∞)</div>
+    <div class="problem">예제 3. $\lim_{x \to 0^+} x \ln x$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[변형]</span> 곱셈을 분수 형태로 바꾼다: $x \ln x = \frac{\ln x}{1/x}$ ($\infty/\infty$ 꼴 유도).
+      <div class="formula-container">
+        $$\lim_{x \to 0^+} \frac{\ln x}{1/x} \overset{L'H}{=} \lim_{x \to 0^+} \frac{1/x}{-1/x^2} = \lim_{x \to 0^+} (-x) = 0$$
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 4. 뺄셈 부정형 (∞ - ∞)</div>
+    <div class="problem">예제 4. $\lim_{x \to 0} \left( \frac{1}{x} - \frac{1}{e^x - 1} \right)$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[변형]</span> 통분을 통해 하나의 분수로 합친다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{e^x - 1 - x}{x(e^x - 1)}$$
+      </div>
+      <span class="step-title">[풀이]</span> 분모의 $e^x - 1 \approx x$ 근사를 이용하거나 로피탈을 두 번 적용하면 예제 1과 유사한 과정을 거쳐 **1/2** 임을 알 수 있다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 5. 지수 부정형 (1^∞, 0^0, ∞^0)</div>
+    <div class="problem">예제 5. $\lim_{x \to 0^+} (1+x)^{1/x}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[전략]</span> $y = (1+x)^{1/x}$라 하고 양변에 자연로그를 취한다.
+      <div class="formula-container">
+        $$\ln y = \frac{\ln(1+x)}{x}$$
+      </div>
+      <span class="step-title">[로피탈 적용]</span> $\lim_{x \to 0} \frac{\ln(1+x)}{x}$는 $0/0$ 꼴이므로:
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{1/(1+x)}{1} = 1$$
+      </div>
+      <span class="step-title">[결론]</span> $\ln y \to 1$이므로 $y \to e^1$. 따라서 극한값은 **e**이다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    로피탈의 정리를 남용하기보다, <b>테일러 급수</b>나 <b>기초 극한 공식</b>을 먼저 고려하는 것이 계산 실수를 줄이는 지름길입니다. <br>
+    © 2026 Advanced Calculus Analysis Series
+  </div>
+</div>
+</body>
+</html>

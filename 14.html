@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 연속성 증명 실전 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e3a8a;}
+  .lead{
+    font-size:1.1rem; background:#eff6ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .type-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#dbeafe; color:#1e40af;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #2563eb; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>연속성 증명: 유형별 실전 예제</h1>
+  <div class="lead">
+    $\epsilon-\delta$ 증명의 핵심은 주어진 $\epsilon$에 대하여 $|f(x)-f(c)| < \epsilon$을 만족하도록 만드는 $\delta$를 <b>$x$와 상관없이 $c$와 $\epsilon$만으로 표현</b>해내는 것입니다.
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 1. 다항함수의 연속성</div>
+    <div class="problem">예제 1. $f(x) = x^2$이 임의의 실수 $c$에서 연속임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|x^2 - c^2| = |x-c||x+c|$ 이다. $|x-c| < 1$이라 가정하면 $|x+c| = |x-c+2c| \le |x-c| + 2|c| < 1 + 2|c|$이다.
+      <span class="step-title">[증명]</span> 임의의 $\epsilon > 0$에 대하여 $\delta = \min(1, \frac{\epsilon}{1+2|c|})$로 택하자.
+      <div class="formula-container">
+        $$|x-c| < \delta \implies |x^2 - c^2| = |x-c||x+c| < \frac{\epsilon}{1+2|c|} \cdot (1+2|c|) = \epsilon$$
+      </div>
+      따라서 $f(x)=x^2$은 $c$에서 연속이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 2. 유리함수의 연속성</div>
+    <div class="problem">예제 2. $f(x) = \frac{1}{x}$이 $c > 0$에서 연속임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|\frac{1}{x} - \frac{1}{c}| = \frac{|x-c|}{xc}$이다. 분모의 $x$를 통제하기 위해 $|x-c| < \frac{c}{2}$로 잡으면 $x > \frac{c}{2}$가 되어 $\frac{1}{xc} < \frac{2}{c^2}$이 성립한다.
+      <span class="step-title">[증명]</span> $\delta = \min(\frac{c}{2}, \frac{c^2 \epsilon}{2})$로 택하면:
+      <div class="formula-container">
+        $$|x-c| < \delta \implies |\frac{1}{x} - \frac{1}{c}| = \frac{|x-c|}{xc} < \frac{c^2 \epsilon}{2} \cdot \frac{2}{c^2} = \epsilon$$
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 3. 무리함수의 연속성</div>
+    <div class="problem">예제 3. $f(x) = \sqrt{x}$가 $c > 0$에서 연속임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|\sqrt{x} - \sqrt{c}| = \frac{|x-c|}{\sqrt{x}+\sqrt{c}} \le \frac{|x-c|}{\sqrt{c}}$이다.
+      <span class="step-title">[증명]</span> $\delta = \sqrt{c}\epsilon$으로 택하면 (단, $x \ge 0$ 범위 내):
+      <div class="formula-container">
+        $$|x-c| < \delta \implies |\sqrt{x} - \sqrt{c}| \le \frac{|x-c|}{\sqrt{c}} < \frac{\sqrt{c}\epsilon}{\sqrt{c}} = \epsilon$$
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 4. Dirichlet 함수의 불연속성</div>
+    <div class="problem">예제 4. $f(x) = \begin{cases} 1 & (x \in \mathbb{Q}) \\ 0 & (x \notin \mathbb{Q}) \end{cases}$ 가 모든 점에서 불연속임을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 임의의 실수 $c$에 대하여:
+      <p>1. 유리수 수열 $\{r_n\}$이 $c$로 수렴하도록 잡으면 $f(r_n) = 1 \to 1$.</p>
+      <p>2. 무리수 수열 $\{s_n\}$이 $c$로 수렴하도록 잡으면 $f(s_n) = 0 \to 0$.</p>
+      수열 판정법에 의해 두 극한값이 일치하지 않으므로 $f$는 $c$에서 연속일 수 없다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 5. 성질을 이용한 일반 증명</div>
+    <div class="problem">예제 5. $g$가 $c$에서 연속이고 $f$가 $g(c)$에서 연속이면, $f \circ g$는 $c$에서 연속임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $\epsilon > 0$이 주어졌을 때, $f$의 연속성에 의해 $|y - g(c)| < \eta \implies |f(y) - f(g(c))| < \epsilon$인 $\eta > 0$이 존재한다. 
+      다시 $g$의 연속성에 의해 $|x - c| < \delta \implies |g(x) - g(c)| < \eta$인 $\delta > 0$이 존재한다.
+      <span class="step-title">[결론]</span> 따라서 $|x - c| < \delta$이면 $|g(x) - g(c)| < \eta$이고, 이는 $|f(g(x)) - f(g(c))| < \epsilon$을 의미한다.
+    </div>
+  </div>
+
+  <div class="footer">
+    $\epsilon-\delta$ 증명은 <b>"적절한 $\delta$를 찾아내는 기술"</b>입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

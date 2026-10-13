@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 실수의 완비성 공리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#064e3b;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #10b981; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#d1fae5; color:#047857;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>실수의 완비성 공리 (Completeness Axiom)</h1>
+  <div class="lead">
+    완비성 공리는 "실수 직선 위에는 구멍이 없다"는 사실을 수학적으로 정의합니다. 이는 유리수 체계($\mathbb{Q}$)에서는 불가능한 <b>극한의 수렴성</b>을 보장하는 유일한 근거입니다.
+  </div>
+
+  <h2>1. 상한 공리 (Least Upper Bound Axiom)</h2>
+  <div class="concept-card">
+    <p>실수의 완비성을 설명하는 가장 표준적인 방식입니다.</p>
+    <div class="formula-container" style="background:#064e3b;">
+      $$\text{공집합이 아니고 위로 유계인 임의의 실수 부분집합 } S \subset \mathbb{R} \text{은}$$
+      $$\text{반드시 } \mathbb{R} \text{ 내에 상한}(\sup S) \text{을 가진다.}$$
+    </div>
+    <p>유리수 집합에서는 $\{x \in \mathbb{Q} : x^2 < 2\}$의 상한이 $\sqrt{2}$(무리수)이므로 이 공리가 성립하지 않습니다.</p>
+  </div>
+
+  
+
+  <h2>2. 완비성과 동치인 명제들</h2>
+  <p>해석학의 문맥에 따라 완비성은 다음과 같은 다양한 형태로 표현되며, 이들은 모두 논리적으로 동치입니다.</p>
+  <ul>
+    <li><b>단조수렴 정리 (Monotone Convergence Theorem):</b> 유계인 단조수열은 반드시 수렴한다.</li>
+    <li><b>축소구간 정리 (Nested Interval Property):</b> 닫힌 구간들이 중첩되어 작아지면, 그 모든 구간에 공통으로 포함되는 점이 존재한다.</li>
+    <li><b>코시 판정법 (Cauchy Criterion):</b> 실수의 수열이 코시 수열이면 반드시 수렴한다.</li>
+    <li><b>볼차노-바이어슈트라스 정리:</b> 유계인 모든 수열은 수렴하는 부분수열을 갖는다.</li>
+  </ul>
+
+  <h2>3. 왜 공리(Axiom)인가?</h2>
+  <div class="concept-card" style="border-left: 5px solid #10b981;">
+    <div class="badge">Important Insight</div>
+    <p>완비성은 다른 성질로부터 유도되는 '정리'가 아니라, 우리가 다루는 <b>실수라는 대상의 본질적 정의</b>입니다. 실수를 정의할 때 사칙연산(체 공리), 크기 비교(순서 공리)와 더불어 이 완비성을 추가함으로써 비로소 우리가 아는 실수가 완성됩니다.</p>
+  </div>
+
+  
+
+  <h2>4. 주요 응용: 아르키메데스 성질</h2>
+  <p>완비성 공리를 통해 "아무리 큰 실수라도 그보다 큰 자연수가 존재한다"는 직관을 증명할 수 있습니다.</p>
+  <div class="formula-container">
+    $$\text{만약 } \mathbb{N} \text{이 위로 유계라면, 상한 공리에 의해 } \sup \mathbb{N} = M \text{이 존재해야 한다.}$$
+    $$\text{하지만 } M-1 \text{은 상계가 아니므로 } n > M-1 \text{인 } n \in \mathbb{N} \text{이 존재하고,}$$
+    $$n+1 > M \text{이 되어 } M \text{이 상계라는 가정에 모순이 발생한다.}$$
+  </div>
+
+  <h2>5. 요약</h2>
+  <p>실수의 완비성은 <b>연속성</b>을 보장하며, 이를 통해 우리는 함수가 특정 값을 향해 갈 때 그 자리에 실제로 '값'이 존재함을 확신하고 미분과 적분을 수행할 수 있습니다.</p>
+
+  <div class="footer">
+    완비성은 수학적 '존재성'의 뿌리입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

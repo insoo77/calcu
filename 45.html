@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 이중적분과 삼중적분</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#065f46;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .formula-container{
+    background:#111827; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-2d { background:#dcfce7; color:#166534; }
+  .tag-3d { background:#dbeafe; color:#1e40af; }
+  .info-panel {
+    background:#fffbeb; border-left:5px solid #f59e0b; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>다중 적분 (Multiple Integrals)</h1>
+  <div class="lead">
+    적분 영역을 평면(Region)과 공간(Solid)으로 확장합니다. <b>푸비니 정리(Fubini's Theorem)</b>를 통해 다중 적분을 반복 적분(Iterated Integral)으로 변환하여 계산하는 것이 핵심입니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-2d">Double Integral</div>
+      <h2>1. 이중적분</h2>
+      <p>평면 영역 $D$ 위에서 함수 $f(x, y)$를 적분합니다. 주로 곡면 아래의 <b>부피</b>를 구하는 데 사용됩니다.</p>
+      
+      <h3>직교좌표계 형식</h3>
+      <div class="formula-container">
+        $$\iint_D f(x,y) dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y) dy dx$$
+      </div>
+      
+      <h3>극좌표 변환 (Polar)</h3>
+      <p>원형 영역인 경우 $x=r\cos\theta, y=r\sin\theta$를 대입합니다.</p>
+      <div class="formula-container">
+        $$\iint_D f(x,y) dA = \iint_R f(r\cos\theta, r\sin\theta) \mathbf{r} dr d\theta$$
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-3d">Triple Integral</div>
+      <h2>2. 삼중적분</h2>
+      <p>공간 영역 $E$ 위에서 함수 $f(x, y, z)$를 적분합니다. <b>질량</b>이나 <b>입체의 부피</b>(함수가 1인 경우)를 구합니다.</p>
+      
+      <h3>직교좌표계 형식</h3>
+      <div class="formula-container">
+        $$\iiint_E f(x,y,z) dV = \int_a^b \int_{g_1(x)}^{g_2(x)} \int_{h_1(x,y)}^{h_2(x,y)} f dz dy dx$$
+      </div>
+      
+      <h3>좌표계 확장</h3>
+      <ul>
+        <li><b>원주좌표계:</b> $(r, \theta, z)$ 사용, $dV = r dz dr d\theta$</li>
+        <li><b>구면좌표계:</b> $(\rho, \phi, \theta)$ 사용, $dV = \rho^2 \sin\phi d\rho d\phi d\theta$</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>좌표 변환과 야코비안 (Jacobian)</h2>
+  <div class="info-panel">
+    다중 적분에서 변수 변환을 할 때, 영역의 왜곡을 보정해주는 비율을 <b>야코비안</b>이라고 합니다.
+    <div class="formula-container" style="background:#451a03; margin-top:10px;">
+      $$dA = \left| \frac{\partial(x,y)}{\partial(u,v)} \right| du dv$$
+    </div>
+    <p>극좌표에서의 $r$, 구면좌표에서의 $\rho^2\sin\phi$가 바로 이 야코비안 성분입니다.</p>
+  </div>
+
+  <h2>응용 분야</h2>
+  <ul>
+    <li><b>질량(Mass):</b> 밀도 함수 $\rho(x,y,z)$를 영역에 대해 적분</li>
+    <li><b>무게중심(Center of Mass):</b> 모멘트를 질량으로 나눈 값</li>
+    <li><b>관성 모멘트(Moment of Inertia):</b> 회전 저항의 척도 계산</li>
+  </ul>
+
+  <div class="footer">
+    복잡한 영역일수록 적절한 <b>적분 순서 변경</b>과 <b>좌표계 선택</b>이 계산의 성패를 좌우합니다. <br>
+    © 2026 Calculus Advanced Curriculum
+  </div>
+</div>
+</body>
+</html>

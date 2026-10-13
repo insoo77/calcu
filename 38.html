@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 급수 수렴 판정법</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#1e40af;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-comp { background:#dbeafe; color:#1e40af; }
+  .tag-ratio { background:#fef3c7; color:#92400e; }
+  .info-panel {
+    background:#f0f9ff; border-left:5px solid #0ea5e9; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>급수 수렴 판정법 (Convergence Tests)</h1>
+  <div class="lead">
+    양항 급수($a_n \ge 0$)의 수렴 여부를 판단하기 위해 이미 알고 있는 급수와 비교하거나, 항 사이의 비율을 관찰합니다. 이 도구들은 복잡한 급수의 행동을 단순화하여 파악하게 해줍니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-comp">Comparison Test</div>
+      <h2>1. 비교 판정법</h2>
+      <p>수렴 또는 발산을 이미 알고 있는 벤치마크 급수($p$-급수, 기하급수 등)와 크기를 직접 비교합니다.</p>
+      
+      <div class="formula-container">
+        $$\text{1. } 0 \le a_n \le b_n \text{ 이고 } \sum b_n \text{ 이 수렴하면 } \sum a_n \text{ 도 수렴}$$
+        $$\text{2. } 0 \le b_n \le a_n \text{ 이고 } \sum b_n \text{ 이 발산하면 } \sum a_n \text{ 도 발산}$$
+      </div>
+      
+      <h3>극한 비교 판정법 (LCT)</h3>
+      <p>두 급수의 일반항 비율의 극한을 봅니다.</p>
+      <div class="formula-container">
+        $$\lim_{n \to \infty} \frac{a_n}{b_n} = c \quad (0 < c < \infty)$$
+      </div>
+      <p class="small">위 조건 만족 시 $\sum a_n$과 $\sum b_n$은 <b>운명을 같이 합니다</b> (둘 다 수렴하거나 둘 다 발산).</p>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-ratio">Ratio Test</div>
+      <h2>2. 비 판정법 (D'Alembert)</h2>
+      <p>이웃한 두 항의 비율이 극한에서 어떻게 변하는지 관찰합니다. 특히 <b>팩토리얼($n!$)</b>이나 <b>지수($a^n$)</b>가 포함된 급수에 매우 강력합니다.</p>
+      
+      <div class="formula-container">
+        $$L = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|$$
+      </div>
+      
+      <h3>판정 결과</h3>
+      <ul>
+        <li><b>$L < 1$:</b> 절대 수렴</li>
+        <li><b>$L > 1$:</b> 발산</li>
+        <li><b>$L = 1$:</b> <b>판정 불능</b> (다른 판정법 필요)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>판정 도구 선택 가이드</h2>
+  <div class="info-panel">
+    어떤 판정법을 쓸지 고민될 때는 다음 순서를 따르세요.
+    <ol>
+      <li><b>발산 판정법:</b> $\lim_{n \to \infty} a_n \neq 0$ 인가? 그렇다면 즉시 발산!</li>
+      <li><b>비 판정법:</b> $n!$이나 $a^n$ 꼴이 있는가?</li>
+      <li><b>비교/극한 비교 판정법:</b> 다항식의 분수 꼴인가? ($p$-급수와 비교)</li>
+      <li><b>적분 판정법:</b> $f(x)$로 치환했을 때 적분이 쉬운 꼴인가? (예: $1/(n \ln n)$)</li>
+    </ol>
+  </div>
+
+  <h2>자주 쓰이는 비교 대상 ($p$-급수)</h2>
+  <div class="box" style="background:#f8fafc;">
+    <div class="formula-container" style="background:#0f172a;">
+      $$\sum_{n=1}^{\infty} \frac{1}{n^p} \implies \begin{cases} p > 1 & \text{수렴} \\ p \le 1 & \text{발산} \end{cases}$$
+    </div>
+    <p class="small">※ 특히 $p=1$인 <b>조화급수</b>는 매우 천천히 증가하지만 결국 발산한다는 점을 잊지 마세요!</p>
+  </div>
+
+  <div class="footer">
+    급수 판정법은 이후 <b>멱급수(Power Series)</b>의 수렴 반지름을 결정하는 결정적인 기초가 됩니다. <br>
+    © 2026 Advanced Calculus Analysis Series
+  </div>
+</div>
+</body>
+</html>

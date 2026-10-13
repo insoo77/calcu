@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 중간값 정리 (IVT)</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f43f5e; color:#881337;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #f43f5e; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fff1f2,#ffe4e6);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f43f5e;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#ffe4e6; color:#9f1239;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>연속 함수의 성질: 중간값 정리</h1>
+  <div class="lead">
+    중간값 정리는 연속함수가 두 점 사이의 모든 값을 적어도 한 번은 "통과"해야 함을 보장합니다. 이는 실수계의 <b>완비성(Completeness)</b>과 깊이 연관된 성질입니다.
+  </div>
+
+  <h2>1. 중간값 정리 (Intermediate Value Theorem)</h2>
+  <div class="box">
+    <p>함수 $f$가 닫힌 구간 $[a, b]$에서 <b>연속</b>이고, $f(a) \neq f(b)$라고 하자.</p>
+    <p>$f(a)$와 $f(b)$ 사이의 임의의 값 $k$에 대하여, 다음을 만족하는 $c$가 열린 구간 $(a, b)$에 적어도 하나 존재한다.</p>
+    <div class="formula-container">
+      $$f(c) = k$$
+    </div>
+  </div>
+
+  
+
+  <h2>2. 해석학적 관점에서의 의의</h2>
+  <div class="box">
+    <div class="tag">Topological Property</div>
+    <h3>연결성의 보존</h3>
+    <p>위상수학적으로 중간값 정리는 <b>"연속함수는 연결 집합(Connected Set)을 연결 집합으로 보낸다"</b>는 성질의 특수한 케이스입니다. 구간 $I$가 연결되어 있다면, 그 이미지 $f(I)$ 역시 구간(연결 집합)이어야 합니다.</p>
+  </div>
+
+  <h2>3. 주요 응용: 근의 존재성</h2>
+  <p>중간값 정리의 가장 흔한 응용은 방정식 $f(x) = 0$의 해가 특정 구간에 존재하는지 판별하는 것입니다.</p>
+  <div class="formula-container" style="background:#4c0519;">
+    $$f(a) \cdot f(b) < 0 \implies \exists c \in (a, b) \text{ s.t. } f(c) = 0$$
+  </div>
+  <ul>
+    <li><b>이분법(Bisection Method):</b> 이 원리를 반복하여 해의 근사값을 찾는 수치해석적 방법입니다.</li>
+    <li><b>고정점 정리:</b> $f: [0, 1] \to [0, 1]$이 연속이면 $f(x) = x$인 점이 반드시 존재함을 증명할 때 사용됩니다.</li>
+  </ul>
+
+  <h2>4. 주의사항: 불연속 함수의 경우</h2>
+  <div class="box" style="border-left: 5px solid #f43f5e;">
+    <p>중간값 정리는 <b>역은 성립하지 않습니다.</b></p>
+    <p>함수가 중간값 성질(Darboux 성질)을 가진다고 해서 반드시 연속인 것은 아닙니다. (예: $\sin(1/x)$를 원점에서 적절히 정의한 함수)</p>
+    <p>하지만, <b>모든 도함수($f'$)</b>는 불연속일지라도 항상 중간값 성질을 만족한다는 <b>다르부의 정리(Darboux's Theorem)</b>는 매우 흥미로운 주제입니다.</p>
+  </div>
+
+  <h2>5. 실생활 예시 (고전적 비유)</h2>
+  <p>지면에서 높이 100m인 산 정상까지 올라갈 때, 경로가 아무리 험난하더라도 당신은 0m부터 100m 사이의 <b>모든 고도</b>를 적어도 한 번은 거쳐야만 합니다. 순간이동을 하지 않는 한 말이죠.</p>
+
+  <div class="footer">
+    중간값 정리는 존재성을 보장할 뿐, 구체적인 위치를 찾는 것은 또 다른 영역(알고리즘)의 문제입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

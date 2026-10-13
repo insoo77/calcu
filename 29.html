@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 삼각함수와 로피탈의 정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #ec4899; color:#9d174d;}
+  .lead{
+    font-size:1.1rem; background:#fdf2f8; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #ec4899;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .trig-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fce7f3; color:#be185d;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #be185d; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>로피탈의 정리: 삼각함수 실전 예제</h1>
+  <div class="lead">
+    삼각함수가 포함된 극한은 미분 시 <b>부호($\pm$) 변화</b>와 <b>계수 처리</b>에 유의해야 합니다. 특히 탄젠트($\tan x$)나 역삼각함수가 포함된 경우 미분 공식이 복잡해지므로 신중한 계산이 필요합니다.
+  </div>
+
+  <div class="example-box">
+    <div class="trig-badge">Ex 1. 고계 미분형 (0/0)</div>
+    <div class="problem">예제 1. $\lim_{x \to 0} \frac{x - \sin x}{x^3}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[풀이]</span> $0/0$ 꼴이므로 로피탈을 반복 적용한다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{1 - \cos x}{3x^2} \overset{L'H}{=} \lim_{x \to 0} \frac{\sin x}{6x} \overset{L'H}{=} \lim_{x \to 0} \frac{\cos x}{6} = \frac{1}{6}$$
+      </div>
+      <p class="small">※ 이 결과는 $\sin x \approx x - \frac{x^3}{6}$ 이라는 테일러 전개의 계수와 일치합니다.</p>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="trig-badge">Ex 2. 탄젠트 부정형 (0/0)</div>
+    <div class="problem">예제 2. $\lim_{x \to 0} \frac{\tan x - x}{x - \sin x}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[풀이]</span> $0/0$ 꼴이다. $\frac{d}{dx}\tan x = \sec^2 x$ 임을 이용한다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{\sec^2 x - 1}{1 - \cos x} = \lim_{x \to 0} \frac{\tan^2 x}{1 - \cos x}$$
+      </div>
+      <span class="step-title">[팁]</span> 여기서 $\tan^2 x = \frac{\sin^2 x}{\cos^2 x} = \frac{1-\cos^2 x}{\cos^2 x} = \frac{(1-\cos x)(1+\cos x)}{\cos^2 x}$ 로 변형하면 로피탈 없이도 해결 가능하다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{(1-\cos x)(1+\cos x)}{\cos^2 x(1-\cos x)} = \lim_{x \to 0} \frac{1+\cos x}{\cos^2 x} = \frac{2}{1} = 2$$
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="trig-badge">Ex 3. 치환과 로피탈 (0 · ∞)</div>
+    <div class="problem">예제 3. $\lim_{x \to \infty} x \sin(\frac{1}{x})$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[변형]</span> $t = 1/x$ 로 치환하면 $x \to \infty$ 일 때 $t \to 0^+$ 이다.
+      <div class="formula-container">
+        $$\lim_{t \to 0^+} \frac{\sin t}{t}$$
+      </div>
+      <span class="step-title">[풀이]</span> $0/0$ 꼴이므로 로피탈을 적용하면:
+      <div class="formula-container">
+        $$\lim_{t \to 0^+} \frac{\cos t}{1} = 1$$
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="trig-badge">Ex 4. 역삼각함수 포함 (0/0)</div>
+    <div class="problem">예제 4. $\lim_{x \to 0} \frac{\arcsin x - x}{x^3}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[풀이]</span> $\frac{d}{dx}\arcsin x = \frac{1}{\sqrt{1-x^2}}$ 이다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{\frac{1}{\sqrt{1-x^2}} - 1}{3x^2} = \lim_{x \to 0} \frac{1 - \sqrt{1-x^2}}{3x^2\sqrt{1-x^2}}$$
+      </div>
+      <span class="step-title">[재판정]</span> 분자를 유리화하거나 로피탈을 다시 적용하면 극한값은 **1/6** 이 된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="trig-badge">Ex 5. 지수-삼각 복합형 (1^∞)</div>
+    <div class="problem">예제 5. $\lim_{x \to 0} (\cos x)^{1/x^2}$ 의 값을 구하시오.</div>
+    <div class="solution">
+      <span class="step-title">[전략]</span> $y = (\cos x)^{1/x^2}$ 에 로그를 취한다. $\ln y = \frac{\ln(\cos x)}{x^2}$.
+      <span class="step-title">[로피탈 적용]</span> $0/0$ 꼴이다.
+      <div class="formula-container">
+        $$\lim_{x \to 0} \frac{\frac{1}{\cos x}(-\sin x)}{2x} = \lim_{x \to 0} \frac{-\tan x}{2x} \overset{L'H}{=} \lim_{x \to 0} \frac{-\sec^2 x}{2} = -\frac{1}{2}$$
+      </div>
+      <span class="step-title">[결론]</span> $\ln y \to -1/2$ 이므로 $y \to e^{-1/2} = \frac{1}{\sqrt{e}}$ 이다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    삼각함수 극한에서 $\frac{\sin x}{x} \to 1$이나 $\frac{1-\cos x}{x^2} \to \frac{1}{2}$ 같은 <b>표준 극한값</b>을 미리 숙지하면 로피탈 계산 도중에 검산하기 매우 좋습니다. <br>
+    © 2026 Advanced Calculus Problem Solving Series
+  </div>
+</div>
+</body>
+</html>

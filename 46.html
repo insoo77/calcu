@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 선적분과 면적분</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#4338ca;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f5f3ff,#ede9fe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #8b5cf6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; text-transform:uppercase;
+  }
+  .tag-line { background:#dbeafe; color:#1e40af; }
+  .tag-surface { background:#fef3c7; color:#92400e; }
+  .graph-placeholder {
+    background:#f1f5f9; border:2px dashed #cbd5e1; border-radius:12px;
+    padding:40px; margin:15px 0; text-align:center; color:#64748b; font-style:italic;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>선적분과 면적분 (Line & Surface Integrals)</h1>
+  <div class="lead">
+    적분 기호 아래의 영역이 단순한 구간이나 평면이 아닌, <b>곡선(Curve)</b>이나 <b>곡면(Surface)</b>으로 확장됩니다. 벡터장 내에서의 에너지 변화와 흐름을 정량화하는 미적분학의 핵심 단계입니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-line">Line Integral</div>
+      <h2>1. 선적분</h2>
+      <p>곡선 $C$를 따라 함수 또는 벡터장을 적분합니다. 매개변수화 $\mathbf{r}(t)$가 필수적입니다.</p>
+      
+      <h3>스칼라 함수의 선적분</h3>
+      <div class="formula-container">
+        $$\int_C f ds = \int_a^b f(\mathbf{r}(t)) |\mathbf{r}'(t)| dt$$
+      </div>
+      
+      <h3>벡터장의 선적분 (일, Work)</h3>
+      <div class="formula-container">
+        $$\int_C \mathbf{F} \cdot d\mathbf{r} = \int_a^b \mathbf{F}(\mathbf{r}(t)) \cdot \mathbf{r}'(t) dt$$
+      </div>
+      
+      <p class="small"><b>의미:</b> 입자가 경로 $C$를 따라 이동할 때 벡터장 $\mathbf{F}$가 해준 총 일의 양.</p>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-surface">Surface Integral</div>
+      <h2>2. 면적분</h2>
+      <p>3차원 공간의 곡면 $S$ 위에서 적분합니다. 곡면의 매개변수 표현 $\mathbf{r}(u, v)$을 사용합니다.</p>
+      
+      <h3>스칼라 함수의 면적분</h3>
+      <div class="formula-container">
+        $$\iint_S f dS = \iint_D f(\mathbf{r}(u,v)) |\mathbf{r}_u \times \mathbf{r}_v| dA$$
+      </div>
+
+      <h3>벡터장의 면적분 (유속, Flux)</h3>
+      <div class="formula-container">
+        $$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iint_S (\mathbf{F} \cdot \mathbf{n}) dS$$
+      </div>
+      
+      <p class="small"><b>의미:</b> 단위 시간당 곡면 $S$를 통과하는 유체나 전기력선의 총량(알짜 흐름).</p>
+    </div>
+  </div>
+
+  <h2>주요 비교 포인트</h2>
+  <div class="box" style="background:#fdfaff;">
+    <ul>
+      <li><b>미소 요소($d\mathbf{r}$ vs $d\mathbf{S}$):</b> 선적분은 경로의 방향 벡터를, 면적분은 곡면의 법선(Normal) 벡터를 곱합니다.</li>
+      <li><b>경로 독립성:</b> 보존력장($\mathbf{F} = \nabla \phi$)에서의 선적분은 양 끝점에만 의존합니다.</li>
+      <li><b>방향성(Orientation):</b> 선적분은 경로의 진행 방향이, 면적분은 '앞면/뒷면(법선 방향)'의 정의가 결과의 부호를 결정합니다.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    이 개념들은 이후 <b>그린 정리, 스토크스 정리, 발산 정리</b>를 통해 서로 연결되며 벡터 해석학의 완성으로 이어집니다. <br>
+    © 2026 Advanced Calculus Educational Series
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 집합론 기초</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f43f5e; color:#881337;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #f43f5e; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fff1f2,#ffe4e6);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f43f5e;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-card {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#ffe4e6; color:#be123c;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>집합론 기초 (Sets, Functions, and Mappings)</h1>
+  <div class="lead">
+    모든 수학적 구조의 가장 원자적인 단위는 <b>집합</b>이며, 이들 사이의 관계를 규정하는 것이 <b>함수</b>입니다. 해석학의 많은 정리는 이 함수들의 대응 관계(Mapping)를 분석하는 데서 출발합니다.
+  </div>
+
+  <h2>1. 집합의 기본 개념과 연산</h2>
+  <div class="concept-card">
+    <p>해석학에서는 주로 실수 집합 $\mathbb{R}$의 부분집합을 다룹니다. 특히 <b>드 모르간의 법칙(De Morgan's Laws)</b>은 임의의 인덱스 가족 $\{A_\alpha\}_{\alpha \in I}$에 대해서도 성립합니다.</p>
+    <div class="formula-container">
+      $$\left( \bigcup_{\alpha \in I} A_\alpha \right)^c = \bigcap_{\alpha \in I} A_\alpha^c, \quad \left( \bigcap_{\alpha \in I} A_\alpha \right)^c = \bigcup_{\alpha \in I} A_\alpha^c$$
+    </div>
+  </div>
+
+  <h2>2. 함수의 엄밀한 정의</h2>
+  <p>함수 $f: A \to B$는 집합 $A$의 <b>모든 원소</b>가 $B$의 <b>단 하나의 원소</b>에 대응되는 관계입니다. 이때 $A$를 정의역(Domain), $B$를 공역(Codomain)이라 하며, 실제 대응된 값들의 집합 $f(A)$를 치역(Range)이라 합니다.</p>
+  
+  
+
+  <h2>3. 대응의 유형 (Type of Mappings)</h2>
+  <div class="concept-card" style="border-left: 5px solid #f43f5e;">
+    <div class="badge">Essential Classifications</div>
+    <ul>
+      <li><b>단사 함수 (Injective, One-to-one):</b> $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$. 서로 다른 투입값은 서로 다른 결과값을 냅니다.</li>
+      <li><b>전사 함수 (Surjective, Onto):</b> $f(A) = B$. 공역과 치역이 일치하여 노는 원소가 없습니다.</li>
+      <li><b>전단사 함수 (Bijective):</b> 단사이면서 전사인 함수입니다. 이 경우에만 <b>역함수(Inverse function)</b>가 존재합니다.</li>
+    </ul>
+  </div>
+
+  
+
+[Image of injective surjective and bijective function diagrams]
+
+
+  <h2>4. 역상과 상 (Images and Pre-images)</h2>
+  <p>해석학 증명에서 가장 빈번하게 사용되는 도구입니다. 집합 $E \subset A$와 $H \subset B$에 대하여:</p>
+  <ul>
+    <li><b>상(Image):</b> $f(E) = \{f(x) : x \in E\}$</li>
+    <li><b>역상(Pre-image):</b> $f^{-1}(H) = \{x \in A : f(x) \in H\}$</li>
+  </ul>
+  <div class="formula-container" style="background:#4c0519;">
+    $$f^{-1}(B \setminus H) = A \setminus f^{-1}(H)$$
+    <p style="font-size: 0.9rem; margin-top: 10px;">(역상은 차집합 연산을 보존하지만, 상은 그렇지 않을 수 있음에 주의!)</p>
+  </div>
+
+  <h2>5. 집합의 크기 (Cardinality)</h2>
+  <p>두 집합 사이에 전단사 함수가 존재하면 두 집합의 <b>농도(Cardinality)</b>가 같다고 합니다.</p>
+  <ul>
+    <li><b>가부번 집합 (Countable):</b> 자연수 집합 $\mathbb{N}$과 농도가 같은 집합 (예: $\mathbb{Z}, \mathbb{Q}$).</li>
+    <li><b>비가산 집합 (Uncountable):</b> $\mathbb{N}$보다 농도가 큰 집합 (예: $\mathbb{R}, [0, 1]$).</li>
+  </ul>
+
+  
+
+  <div class="footer">
+    함수의 대응 관계를 명확히 이해하는 것은 해석학적 직관의 토대입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

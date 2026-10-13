@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 편미분과 전미분</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #8b5cf6; color:#5b21b6;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f5f3ff,#ede9fe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #8b5cf6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-partial { background:#ede9fe; color:#5b21b6; }
+  .tag-total { background:#ecfdf5; color:#065f46; }
+  .info-panel {
+    background:#fff7ed; border-left:5px solid #f97316; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>편미분과 전미분 (Partial & Total Derivatives)</h1>
+  <div class="lead">
+    다변수 함수 $f(x, y)$에서 변수의 변화가 결과값에 미치는 영향을 분석합니다. <b>편미분</b>은 특정 축 방향의 변화율을, <b>전미분</b>은 모든 변수의 미소 변화에 의한 전체 함숫값의 변화량(선형 근사)을 나타냅니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-partial">Partial Derivative</div>
+      <h2>1. 편미분</h2>
+      <p>다른 변수를 상수로 고정하고, 오직 하나의 변수 $x$에 대해서만 미분합니다. 기호로 $\partial$ (라운드)를 사용합니다.</p>
+      
+      <div class="formula-container">
+        $$f_x = \frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$
+      </div>
+      
+      <h3>기하학적 의미</h3>
+      <ul>
+        <li>곡면을 $y = y_0$ 평면으로 잘랐을 때 나타나는 곡선의 <b>접선 기울기</b>입니다.</li>
+        <li>각 독립 변수가 결과값에 기여하는 개별적인 '민감도'를 뜻합니다.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-total">Total Differential</div>
+      <h2>2. 전미분</h2>
+      <p>모든 변수가 각각 $dx, dy$만큼 미세하게 변할 때, 함숫값 $z=f(x,y)$의 실제 변화량 $\Delta z$를 선형적으로 근사한 값입니다.</p>
+      
+      <div class="formula-container">
+        $$df = \frac{\partial f}{\partial x}dx + \frac{\partial f}{\partial y}dy$$
+      </div>
+      
+      <h3>활용성</h3>
+      <ul>
+        <li><b>선형 근사(Linearization):</b> 복잡한 함수값을 접평면을 이용해 간단히 예측합니다.</li>
+        <li><b>오차 분석:</b> 각 변수의 측정 오차가 전체 결과값의 최대 오차에 미치는 영향을 계산합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>고급 개념: 연쇄 법칙 (Chain Rule)</h2>
+  <div class="info-panel">
+    만약 $z = f(x, y)$이고 $x=g(t), y=h(t)$라면, $z$의 $t$에 대한 변화율은 각 편미분 성분의 합으로 나타납니다.
+    <div class="formula-container" style="background:#431407; margin-top:10px;">
+      $$\frac{dz}{dt} = \frac{\partial z}{\partial x}\frac{dx}{dt} + \frac{\partial z}{\partial y}\frac{dy}{dt}$$
+    </div>
+  </div>
+
+  <h2>요점 비교</h2>
+  <ul>
+    <li><b>편미분:</b> "하나만 바뀔 때 어떻게 되는가?" (축 방향의 기울기)</li>
+    <li><b>전미분:</b> "모두가 조금씩 바뀔 때 전체는 어떻게 되는가?" (접평면의 높이 변화)</li>
+    <li><b>미분 가능성:</b> $f_x, f_y$가 존재한다고 해서 반드시 미분 가능한 것은 아니며, 전미분이 적절히 정의되어야 함수가 그 점에서 부드럽다(Differentiable)고 합니다.</li>
+  </ul>
+
+  <div class="footer">
+    편미분과 전미분은 열역학의 상태 방정식 해석이나 경제학의 한계 효용 분석 등 다변수 모델링의 기초가 됩니다. <br>
+    © 2026 Multivariable Calculus Educational Series
+  </div>
+</div>
+</body>
+</html>

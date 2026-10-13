@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 중간값 정리 활용 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f43f5e; color:#881337;}
+  .lead{
+    font-size:1.1rem; background:#fff1f2; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #f43f5e;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .proof-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#ffe4e6; color:#be123c;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #be123c; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>중간값 정리 증명 예제 (Proofs using IVT)</h1>
+  <div class="lead">
+    중간값 정리를 활용한 증명의 핵심은 <b>적절한 보조함수 $g(x)$를 정의</b>하여 문제가 요구하는 조건을 $g(c)=0$의 형태로 변환하는 데 있습니다.
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 1. 홀수 차수 다항식의 성질</div>
+    <div class="problem">문제: 모든 홀수 차수 다항식은 적어도 하나의 실근을 가짐을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $P(x) = a_n x^n + \dots + a_0$ ($n$은 홀수, $a_n > 0$)라 하자.
+      <span class="step-title">[극한 평가]</span> $n$이 홀수이므로 $\lim_{x \to \infty} P(x) = \infty$이고, $\lim_{x \to -\infty} P(x) = -\infty$이다.
+      <span class="step-title">[IVT 적용]</span> 따라서 충분히 큰 양수 $M$과 충분히 작은 음수 $m$을 택하면 $P(M) > 0$이고 $P(m) < 0$이다. 
+      다항함수는 모든 실수에서 연속이므로 $[m, M]$에서 중간값 정리에 의해 $P(c) = 0$인 $c \in (m, M)$가 존재한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 2. 고정점의 존재성 (Fixed Point Theorem)</div>
+    <div class="problem">문제: 함수 $f$가 $[0, 1]$에서 연속이고 함숫값이 $[0, 1]$에 속할 때($f: [0, 1] \to [0, 1]$), $f(c) = c$인 $c \in [0, 1]$가 존재함을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[보조함수 정의]</span> $g(x) = f(x) - x$라 하자. $g(x)$는 $[0, 1]$에서 연속이다.
+      <span class="step-title">[경계값 조사]</span> 
+      $g(0) = f(0) - 0 = f(0) \ge 0$ (공역이 $[0, 1]$이므로). <br>
+      $g(1) = f(1) - 1 \le 0$ ($f(1) \le 1$이므로).
+      <span class="step-title">[IVT 적용]</span> 
+      1) $g(0)=0$ 또는 $g(1)=0$이면 $0$ 또는 $1$이 고정점이다. <br>
+      2) $g(0) > 0$이고 $g(1) < 0$이면 IVT에 의해 $g(c) = 0$, 즉 $f(c) = c$인 $c \in (0, 1)$가 존재한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 3. 두 함수의 교점</div>
+    <div class="problem">문제: $f, g$가 $[a, b]$에서 연속이고 $f(a) < g(a), f(b) > g(b)$이면, $f(c) = g(c)$인 $c \in (a, b)$가 존재함을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[보조함수 정의]</span> $h(x) = f(x) - g(x)$라 하자. $h$는 연속이다.
+      <span class="step-title">[부호 판정]</span> $h(a) = f(a) - g(a) < 0$이고, $h(b) = f(b) - g(b) > 0$이다.
+      <span class="step-title">[IVT 적용]</span> $h(a) \cdot h(b) < 0$이므로 중간값 정리에 의해 $h(c) = 0$, 즉 $f(c) = g(c)$인 $c$가 $(a, b)$ 내에 존재한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 4. 대척점 정리 (Antipodal Point Theorem)</div>
+    <div class="problem">문제: 원 위에서 연속인 함수 $f$가 있을 때, $f(x) = f(-x)$를 만족하는 점 $x$가 반드시 존재함을 보이시오. (예: 지구상 대척점 중 기온이 같은 곳이 있다)</div>
+    <div class="solution">
+      <span class="step-title">[보조함수 정의]</span> 각도 $\theta \in [0, \pi]$에 대해 $g(\theta) = f(\theta) - f(\theta + \pi)$라 하자.
+      <span class="step-title">[관계식 유도]</span> 
+      $g(0) = f(0) - f(\pi)$ <br>
+      $g(\pi) = f(\pi) - f(2\pi) = f(\pi) - f(0) = -g(0)$ ($\because 2\pi$는 제자리)
+      <span class="step-title">[IVT 적용]</span> $g(0)$와 $g(\pi)$는 부호가 반대이거나 둘 다 0이다. 따라서 $g(c) = 0$인 $c \in [0, \pi]$가 존재하며, 이는 $f(c) = f(c+\pi)$임을 의미한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 5. 구간 내 분점의 평균값</div>
+    <div class="problem">문제: $f$가 $[a, b]$에서 연속일 때, $f(c) = \frac{f(x_1) + f(x_2) + \dots + f(x_n)}{n}$을 만족하는 $c \in [a, b]$가 존재함을 보이시오. ($x_1, \dots, x_n \in [a, b]$)</div>
+    <div class="solution">
+      <span class="step-title">[범위 설정]</span> $f$는 컴팩트 구간에서 연속이므로 최솟값 $m$과 최댓값 $M$을 갖는다.
+      <span class="step-title">[부등식 구성]</span> 모든 $i$에 대해 $m \le f(x_i) \le M$이므로:
+      <div class="formula-container">
+        $$m = \frac{nm}{n} \le \frac{\sum f(x_i)}{n} \le \frac{nM}{n} = M$$
+      </div>
+      <span class="step-title">[IVT 적용]</span> 값 $A = \frac{\sum f(x_i)}{n}$는 $f$의 치역의 최소/최대값 사이에 존재한다. 연속함수의 치역은 연결 집합(구간)이므로, $f(c) = A$인 $c$가 반드시 존재한다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    중간값 정리는 <b>실수계가 구멍 없이 꽉 차 있다</b>는 완비성 공리에서 기인합니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

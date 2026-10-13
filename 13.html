@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 연속 함수의 엄밀한 정의</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #3b82f6; color:#1e3a8a;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #3b82f6; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #3b82f6;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .concept-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .badge {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dbeafe; color:#1e40af;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>연속 함수의 엄밀한 정의 (Continuity)</h1>
+  <div class="lead">
+    해석학에서 연속성은 "함숫값의 오차($\epsilon$)를 줄이고 싶다면, 정의역의 거리($\delta$)를 충분히 좁힘으로써 항상 달성할 수 있다"는 논리로 설명됩니다.
+  </div>
+
+  <h2>1. 한 점에서의 연속 (Continuity at a point)</h2>
+  <div class="concept-box">
+    <p>함수 $f: D \to \mathbb{R}$가 점 $c \in D$에서 <b>연속</b>이라는 것은 다음 조건을 만족함을 의미합니다.</p>
+    <div class="formula-container">
+      $$\forall \epsilon > 0, \exists \delta > 0 \quad \text{s.t.} \quad \forall x \in D, \quad |x - c| < \delta \implies |f(x) - f(c)| < \epsilon$$
+    </div>
+    <p>이는 고등학교 식 표현인 $\lim_{x \to c} f(x) = f(c)$를 논리적으로 엄밀하게 구현한 것입니다.</p>
+  </div>
+
+  
+
+  <h2>2. 세 가지 핵심 조건 (The Three Requirements)</h2>
+  <p>어떤 점 $c$에서 $f$가 연속이기 위해서는 다음이 모두 충족되어야 합니다.</p>
+  <ul>
+    <li><b>정의성:</b> $f(c)$가 정의되어 있어야 함 ($c \in \text{dom}(f)$).</li>
+    <li><b>극한 존재:</b> $\lim_{x \to c} f(x)$가 존재해야 함.</li>
+    <li><b>일치성:</b> 극한값과 함숫값이 같아야 함 ($\lim_{x \to c} f(x) = f(c)$).</li>
+  </ul>
+
+  <h2>3. 수열적 연속성 (Sequential Continuity)</h2>
+  <div class="concept-box" style="border-left: 5px solid #3b82f6;">
+    <div class="badge">Characterization by Sequences</div>
+    <p>함수 $f$가 $c$에서 연속일 필요충분조건은 다음과 같습니다.</p>
+    <blockquote>
+      $c$로 수렴하는 정의역 내의 임의의 수열 $\{x_n\}$에 대하여, 수열 $\{f(x_n)\}$이 $f(c)$로 수렴한다.
+    </blockquote>
+    <div class="formula-container" style="background:#2d3748;">
+      $$x_n \to c \implies f(x_n) \to f(c)$$
+    </div>
+    <p>이 성질은 함수가 연속이 아님을 증명(반례 구성)할 때 매우 유용합니다.</p>
+  </div>
+
+  <h2>4. 위상수학적 정의 (Topological Definition)</h2>
+  <p>더 높은 수준의 수학에서는 연속성을 <b>역상(Preimage)</b>의 개념으로 정의합니다.</p>
+  <div class="formula-container">
+    함수 $f$가 연속이다. $\iff$ 임의의 열린 집합 $V$에 대하여, 그 역상 $f^{-1}(V)$가 열린 집합이다.
+  </div>
+  <p>이 정의는 '거리'의 개념이 없는 일반적인 위상 공간에서도 연속성을 논할 수 있게 해줍니다.</p>
+
+  <h2>5. 구간에서의 연속 (Continuity on an Interval)</h2>
+  <p>함수 $f$가 집합 $S$의 모든 점 $c \in S$에서 연속일 때, $f$를 <b>집합 $S$에서 연속</b>이라고 합니다. 특히 폐구간 $[a, b]$에서의 연속은 양 끝점에서의 <b>우연속</b> 및 <b>좌연속</b>을 포함합니다.</p>
+
+  <div class="footer">
+    연속성의 엄밀한 이해는 이후 '평등 연속(Uniform Continuity)'과 '함수열의 수렴'을 이해하는 열쇠가 됩니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

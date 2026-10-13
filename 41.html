@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 멱급수와 수렴 반지름</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#3730a3;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#eef2ff,#e0e7ff);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-series { background:#e0e7ff; color:#3730a3; }
+  .tag-radius { background:#fef2f2; color:#b91c1c; }
+  .info-panel {
+    background:#f0fdf4; border-left:5px solid #22c55e; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>멱급수와 수렴 반지름 (Power Series & Convergence)</h1>
+  <div class="lead">
+    멱급수는 변수 $x$의 거듭제곱을 항으로 갖는 무한급수입니다. 모든 $x$에 대해 수렴하는 것이 아니기에, 급수가 '함수'로서 의미를 갖는 유효 범위인 <b>수렴 구간</b>을 찾는 것이 핵심입니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-series">Definition of Power Series</div>
+      <h2>1. 멱급수의 형태</h2>
+      <p>상수 $a$를 중심으로 하는 멱급수는 다음과 같은 꼴을 가집니다.</p>
+      
+      <div class="formula-container">
+        $$\sum_{n=0}^{\infty} c_n(x-a)^n = c_0 + c_1(x-a) + c_2(x-a)^2 + \dots$$
+      </div>
+      
+      <h3>수렴의 세 가지 가능성</h3>
+      <ul>
+        <li><b>Case 1:</b> 오직 $x=a$에서만 수렴 ($R=0$)</li>
+        <li><b>Case 2:</b> 모든 실수 $x$에 대해 수렴 ($R=\infty$)</li>
+        <li><b>Case 3:</b> 특정 거리 $R$ 이내에서만 수렴 ($|x-a| < R$)</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-radius">Radius of Convergence</div>
+      <h2>2. 수렴 반지름과 구간</h2>
+      <p>급수가 수렴하는 최대 반경 $R$을 결정합니다. 주로 <b>비 판정법(Ratio Test)</b>을 사용하여 $x$의 범위를 도출합니다.</p>
+      
+      <div class="formula-container">
+        $$L = \lim_{n \to \infty} \left| \frac{c_{n+1}(x-a)^{n+1}}{c_n(x-a)^n} \right| < 1$$
+      </div>
+      
+      <h3>수렴 구간 (Interval) 결정법</h3>
+      <ul>
+        <li>먼저 비 판정법으로 개구간 $(a-R, a+R)$을 구합니다.</li>
+        <li><b>중요:</b> 양 끝점($x=a-R, a+R$)에서의 수렴성은 각각 따로 대입하여 판정해야 합니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>수렴 반지름 계산 공식</h2>
+  <div class="info-panel">
+    비 판정법을 일반화하면 수렴 반지름 $R$은 다음과 같이 표현될 수 있습니다 (계수 $c_n$이 0이 아닐 때).
+    <div class="formula-container" style="background:#064e3b; margin-top:10px;">
+      $$R = \lim_{n \to \infty} \left| \frac{c_n}{c_{n+1}} \right| \quad \text{또는} \quad R = \lim_{n \to \infty} \frac{1}{\sqrt[n]{|c_n|}}$$
+    </div>
+  </div>
+
+  <h2>멱급수의 성질 (미분과 적분)</h2>
+  <ul>
+    <li><b>항별 미분:</b> 수렴 반지름 내부에서 멱급수를 미분해도 수렴 반지름은 변하지 않습니다.</li>
+    <li><b>항별 적분:</b> 수렴 반지름 내부에서 멱급수를 적분해도 수렴 반지름은 변하지 않습니다.</li>
+    <li><b>주의:</b> 미분이나 적분 후 <b>양 끝점에서의 수렴 여부</b>는 달라질 수 있습니다.</li>
+  </ul>
+
+  <div class="footer">
+    멱급수는 이후 <b>테일러 급수</b>로 이어지며, 복잡한 함수를 다항식으로 다루는 강력한 도구가 됩니다. <br>
+    © 2026 Advanced Analysis Series
+  </div>
+</div>
+</body>
+</html>

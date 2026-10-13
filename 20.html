@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 컴팩트성 활용 증명 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#1e1b4b;}
+  .lead{
+    font-size:1.1rem; background:#f5f3ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .proof-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#e0e7ff; color:#4338ca;
+  }
+  .problem { font-weight: 700; color: #1e1b4b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #4338ca; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>컴팩트성 활용 증명 예제 (Proofs using Compactness)</h1>
+  <div class="lead">
+    컴팩트 집합의 정의(유한 부분 피복의 존재)와 하이네-보렐 정리(유계 폐집합)를 결합하여 연속함수의 핵심 정리들을 증명하는 과정입니다.
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 1. 유계성 정리 (Boundedness Theorem)</div>
+    <div class="problem">문제: 컴팩트 집합 $K$ 위에서 연속인 함수 $f: K \to \mathbb{R}$은 유계임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 임의의 $x \in K$에 대하여 $f$는 연속이므로, $B(f(x), 1)$의 역상 $f^{-1}(B(f(x), 1))$은 열린 집합이다.
+      <span class="step-title">[피복 구성]</span> $\{f^{-1}(B(f(x), 1)) : x \in K\}$는 $K$의 열린 피복이다.
+      <span class="step-title">[컴팩트성 적용]</span> $K$는 컴팩트하므로 유한 부분 피복 $\{f^{-1}(B(f(x_i), 1))\}_{i=1}^n$이 존재한다.
+      <span class="step-title">[결론]</span> $K$ 내의 모든 $f(x)$ 값은 $n$개의 유한한 열린 구 안에 포함되므로, $f(K)$는 유계이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 2. 최대-최소 정리 (Extreme Value Theorem)</div>
+    <div class="problem">문제: 컴팩트 집합 $K$ 위에서 연속인 함수 $f$는 $K$ 내에서 최댓값과 최솟값을 가짐을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 예제 1에 의해 $f(K)$는 유계이다. 또한 컴팩트 집합의 연속 이미지는 컴팩트하므로 $f(K)$는 $\mathbb{R}$의 컴팩트 집합이다.
+      <span class="step-title">[하이네-보렐 적용]</span> $f(K)$는 유계이고 닫힌 집합이다. 
+      <span class="step-title">[결론]</span> 실수의 완비성에 의해 $M = \sup f(K)$가 존재하며, $f(K)$가 닫힌 집합이므로 $M \in f(K)$이다. 즉, $f(c) = M$인 $c \in K$가 존재하여 최댓값을 가진다. (최솟값도 동일)
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 3. 하이네-칸토어 정리 (Heine-Cantor Theorem)</div>
+    <div class="problem">문제: 컴팩트 집합 $K$에서 연속인 함수 $f$는 $K$에서 평등 연속(Uniformly Continuous)임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 임의의 $\epsilon > 0$에 대해, 각 $x \in K$에서 연속성에 의해 $|x-y| < 2\delta_x \implies |f(x)-f(y)| < \epsilon/2$인 $\delta_x$가 존재한다.
+      <span class="step-title">[피복]</span> $\{B(x, \delta_x) : x \in K\}$는 $K$의 열린 피복이며, 컴팩트성에 의해 유한 부분 피복 $\{B(x_i, \delta_i)\}_{i=1}^n$이 존재한다.
+      <span class="step-title">[결론]</span> $\delta = \min(\delta_1, \dots, \delta_n)$이라 하면, $K$ 내의 임의의 $x, y$에 대해 $|x-y| < \delta$일 때 $|f(x)-f(y)| < \epsilon$이 성립함을 보일 수 있다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 4. 칸토어 교집합 정리 (Cantor's Intersection Theorem)</div>
+    <div class="problem">문제: 공집합이 아닌 컴팩트 집합들의 하강 수열 $K_1 \supset K_2 \supset \dots$ 의 교집합 $\bigcap_{n=1}^\infty K_n$은 공집합이 아님을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 교집합이 공집합이라고 가정하자(귀류법). 그러면 $U_n = K_1 \setminus K_n$은 열린 집합들의 수열이다.
+      <span class="step-title">[피복]</span> $\bigcup U_n = K_1 \setminus (\bigcap K_n) = K_1$이므로 $\{U_n\}$은 $K_1$의 열린 피복이다.
+      <span class="step-title">[결론]</span> $K_1$이 컴팩트하므로 유한 부분 피복 $U_{n_k}$가 존재해야 하지만, 이는 특정 $K_N$이 공집합이라는 모순을 낳는다. 따라서 교집합은 비어있을 수 없다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="proof-badge">Ex 5. 르베그 수 보조정리 (Lebesgue Number Lemma)</div>
+    <div class="problem">문제: 컴팩트 거리공간 $(K, d)$의 열린 피복 $\mathcal{U}$에 대해, $K$의 임의의 부분집합의 지름이 $\delta$보다 작으면 그 집합은 $\mathcal{U}$의 한 원소에 포함되게 하는 $\delta > 0$이 존재함을 보이시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 피복 $\mathcal{U}$의 각 원소들로부터 점 $x$까지의 거리를 이용해 함수 $f(x) = \sup \{ r > 0 : B(x, r) \subset U \text{ for some } U \in \mathcal{U} \}$를 정의한다.
+      <span class="step-title">[결론]</span> 이 함수는 컴팩트 집합 위에서 연속이며 항상 양수이다. 따라서 최솟값 $\delta > 0$을 가지며, 이 $\delta$가 르베그 수가 된다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    컴팩트성을 활용한 증명들은 대개 <b>"국소적(Local) 성질을 전역적(Global) 성질로 확장"</b>하는 논리 구조를 가집니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

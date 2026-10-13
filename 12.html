@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - ε-δ 정의 활용 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #6366f1; color:#1e1b4b;}
+  .lead{
+    font-size:1.1rem; background:#f0f7ff; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #6366f1;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .type-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#e0e7ff; color:#4338ca;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #4338ca; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>ε-δ 정의를 활용한 극한 증명 5선</h1>
+  <div class="lead">
+    극한의 엄밀한 증명은 <b>(1) 적절한 $\delta$를 찾기 위한 예비 분석</b>과 <b>(2) 선택한 $\delta$가 정의를 만족함을 보이는 본 증명</b>의 2단계로 구성됩니다.
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 1. 선형 함수 (Linear Function)</div>
+    <div class="problem">예제 1. $\lim_{x \to 4} (3x - 7) = 5$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|(3x - 7) - 5| = |3x - 12| = 3|x - 4| < \epsilon$ 을 만족해야 한다. <br>
+      따라서 $|x - 4| < \frac{\epsilon}{3}$ 이면 충분하므로 $\delta = \frac{\epsilon}{3}$ 로 선택한다.
+      <span class="step-title">[증명]</span> 임의의 $\epsilon > 0$ 에 대하여 $\delta = \epsilon/3$ 이라 하자. <br>
+      $0 < |x - 4| < \delta$ 이면, $|(3x - 7) - 5| = 3|x - 4| < 3\delta = 3(\frac{\epsilon}{3}) = \epsilon$ 이 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 2. 이차 함수 (Quadratic Function)</div>
+    <div class="problem">예제 2. $\lim_{x \to 2} x^2 = 4$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|x^2 - 4| = |x-2||x+2| < \epsilon$. <br>
+      먼저 $|x-2| < 1$ 이라 가정하면(임의의 거리 제한), $1 < x < 3$ 이므로 $|x+2| < 5$ 이다. <br>
+      따라서 $|x-2| < \min(1, \frac{\epsilon}{5})$ 이면 $|x-2||x+2| < \frac{\epsilon}{5} \cdot 5 = \epsilon$ 이 된다.
+      <span class="step-title">[증명]</span> $\delta = \min(1, \epsilon/5)$ 라 하자. <br>
+      $0 < |x - 2| < \delta$ 이면 $|x+2| < 5$ 이고, $|x^2 - 4| = |x-2||x+2| < \delta \cdot 5 \le \frac{\epsilon}{5} \cdot 5 = \epsilon$ 이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 3. 유리 함수 (Rational Function)</div>
+    <div class="problem">예제 3. $\lim_{x \to 1} \frac{1}{x+2} = \frac{1}{3}$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|\frac{1}{x+2} - \frac{1}{3}| = |\frac{3-(x+2)}{3(x+2)}| = \frac{|x-1|}{3|x+2|} < \epsilon$. <br>
+      $|x-1| < 1$ 이라 가정하면 $0 < x < 2$ 이므로 $x+2 > 2$, 즉 $\frac{1}{|x+2|} < \frac{1}{2}$ 이다. <br>
+      따라서 $\delta = \min(1, 6\epsilon)$ 이면 $\frac{|x-1|}{3|x+2|} < \frac{6\epsilon}{3 \cdot 2} = \epsilon$ 이 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 4. 삼각 함수 (Trigonometric Function)</div>
+    <div class="problem">예제 4. $\lim_{x \to 0} \sin x = 0$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> 잘 알려진 부등식 $|\sin x| \le |x|$ 를 이용한다. <br>
+      임의의 $\epsilon > 0$ 에 대하여 $\delta = \epsilon$ 이라 하자. <br>
+      $0 < |x - 0| < \delta$ 이면, $|\sin x - 0| = |\sin x| \le |x| < \delta = \epsilon$ 이 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="type-badge">유형 5. 극한의 부재 (Non-existence)</div>
+    <div class="problem">예제 5. $\lim_{x \to 0} \sin(\frac{1}{x})$ 가 존재하지 않음을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[수열 판정법 활용]</span> $\epsilon-\delta$ 정의의 부정인 <b>수열 판정법</b>을 사용한다. <br>
+      두 수열 $x_n = \frac{1}{n\pi + \pi/2}$, $y_n = \frac{1}{n\pi}$ 를 고려하자. <br>
+      $n \to \infty$ 일 때 $x_n, y_n \to 0$ 이지만:
+      <div class="formula-container">
+        $$f(x_n) = \sin(n\pi + \pi/2) = \pm 1, \quad f(y_n) = \sin(n\pi) = 0$$
+      </div>
+      서로 다른 값으로 수렴하는 수열이 존재하므로 극한은 존재하지 않는다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    $\epsilon-\delta$ 논법의 핵심은 <b>"상대방이 제시한 오차($\epsilon$)를 내가 통제할 수 있는 거리($\delta$)로 방어하는 논리 게임"</b>입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

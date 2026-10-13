@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 균등연속성 (Uniform Continuity)</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#064e3b;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #10b981; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .comparison-table {
+    width: 100%; border-collapse: collapse; margin: 20px 0;
+  }
+  .comparison-table th, .comparison-table td {
+    border: 1px solid #e2e8f0; padding: 12px; text-align: left;
+  }
+  .comparison-table th { background: #f8fafc; color: #064e3b; }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom: 20px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#dcfce7; color:#065f46;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>균등연속성 (Uniform Continuity)</h1>
+  <div class="lead">
+    균등연속은 구간 내의 임의의 두 점 사이의 거리가 충분히 가까우면, 그 함숫값의 차이도 <b>지점(location)에 관계없이</b> 일정하게 작아지는 성질을 말합니다.
+  </div>
+
+  <h2>1. 엄밀한 정의 ($\epsilon-\delta$ 논법)</h2>
+  <p>함수 $f: I \to \mathbb{R}$이 구간 $I$에서 <b>균등연속</b>이라는 것은 다음과 같습니다.</p>
+  
+  <div class="formula-container">
+    $$\forall \epsilon > 0, \exists \delta > 0 \text{ s.t. } \forall x, y \in I, |x - y| < \delta \implies |f(x) - f(y)| < \epsilon$$
+  </div>
+  
+  <p>※ 일반 연속과의 차이: 일반 연속에서 $\delta$는 $\epsilon$과 <b>점 $x$</b> 모두에 의존하지만($\delta(\epsilon, x)$), 균등연속에서 $\delta$는 오직 <b>$\epsilon$</b>에만 의존합니다($\delta(\epsilon)$).</p>
+
+  
+
+  <h2>2. 주요 정리 및 판정법</h2>
+  <div class="box">
+    <div class="tag">Heine-Cantor Theorem</div>
+    <h3>컴팩트 집합과 균등연속</h3>
+    <p>함수 $f$가 <b>컴팩트 구간 $[a, b]$</b>에서 연속이면, $f$는 그 구간에서 반드시 <b>균등연속</b>이다.</p>
+  </div>
+
+  <div class="box">
+    <div class="tag">Lipschitz Continuity</div>
+    <h3>립시츠 조건</h3>
+    <p>어떤 상수 $M$에 대해 $|f(x) - f(y)| \le M|x - y|$를 만족하면 $f$는 균등연속이다. (예: 도함수가 유계인 함수)</p>
+  </div>
+
+  <h2>3. 대표적인 예시와 반례</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>함수 / 구간</th>
+        <th>균등연속 여부</th>
+        <th>이유</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$f(x) = x^2$ on $[0, 1]$</td>
+        <td><b>YES</b></td>
+        <td>컴팩트 구간에서 연속임</td>
+      </tr>
+      <tr>
+        <td>$f(x) = x^2$ on $\mathbb{R}$</td>
+        <td><b>NO</b></td>
+        <td>$x$가 커질수록 기울기가 무한히 가팔라짐</td>
+      </tr>
+      <tr>
+        <td>$f(x) = \frac{1}{x}$ on $(0, 1)$</td>
+        <td><b>NO</b></td>
+        <td>$x \to 0$ 근처에서 함숫값이 폭발적으로 변화함</td>
+      </tr>
+      <tr>
+        <td>$f(x) = \sqrt{x}$ on $[0, \infty)$</td>
+        <td><b>YES</b></td>
+        <td>도함수는 유계가 아니나, 함숫값의 변화폭이 통제됨</td>
+      </tr>
+    </tbody>
+  </table>
+
+  
+
+  <h2>4. 균등연속의 중요성</h2>
+  <ul>
+    <li><b>리만 적분 가능성:</b> 닫힌 구간에서 연속인 함수가 적분 가능한 이유는 그 함수가 균등연속이기 때문입니다.</li>
+    <li><b>함수열의 극한:</b> 균등연속인 함수들의 수열이 균등수렴(Uniform convergence)하면 극한 함수도 균등연속입니다.</li>
+    <li><b>확장 정리:</b> $f$가 $(a, b)$에서 균등연속이면, 양 끝점 $a, b$에서의 극한값이 존재하여 $[a, b]$로의 연속 확장이 가능합니다.</li>
+  </ul>
+
+  <div class="footer">
+    균등연속은 함수의 '모양'이 구간 전체에서 얼마나 안정적인지를 묻는 질문과 같습니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

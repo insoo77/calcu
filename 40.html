@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 함수열과 함수급수</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#92400e;}
+  h3{font-size:1.25rem; color:#1e293b; margin-top:25px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px;
+  }
+  .tag-point { background:#e5e7eb; color:#374151; }
+  .tag-uniform { background:#fef3c7; color:#92400e; }
+  .info-panel {
+    background:#eff6ff; border-left:5px solid #3b82f6; padding:15px; margin:20px 0; border-radius:8px;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>함수열과 함수급수 (Sequences & Series of Functions)</h1>
+  <div class="lead">
+    함수열 $\{f_n\}$은 각 자연수 $n$에 대해 정의된 함수의 나열입니다. 단순히 값이 수렴하는지를 넘어, 수렴한 결과인 <b>극한함수 $f$가 연속성, 미분 가능성, 적분 가능성을 보존하는가</b>를 탐구합니다.
+  </div>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag tag-point">Pointwise Convergence</div>
+      <h2>1. 점별 수렴</h2>
+      <p>정의역의 각 점 $x$를 고정했을 때, 수열 $f_n(x)$가 $f(x)$로 수렴하는 경우입니다.</p>
+      
+      <div class="formula-container">
+        $$f(x) = \lim_{n \to \infty} f_n(x)$$
+      </div>
+      
+      <h3>한계점</h3>
+      <ul>
+        <li>각 $f_n$이 연속이라도 극한함수 $f$는 불연속일 수 있습니다.</li>
+        <li>적분과 극한의 순서를 함부로 바꿀 수 없습니다.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="tag tag-uniform">Uniform Convergence</div>
+      <h2>2. 평등 수렴 (균등 수렴)</h2>
+      <p>모든 $x$에 대해 $n$이 커짐에 따라 $f_n$이 $f$에 "동시에, 고르게" 접근하는 강력한 수렴 조건입니다.</p>
+      
+      <div class="formula-container">
+        $$\forall \epsilon > 0, \exists N \text{ s.t. } n \ge N \implies |f_n(x) - f(x)| < \epsilon, \forall x$$
+      </div>
+      
+      <h3>강점 (유전적 성질)</h3>
+      <ul>
+        <li><b>연속성:</b> $f_n$이 연속이고 평등 수렴하면 $f$도 연속입니다.</li>
+        <li><b>적분:</b> $\lim \int f_n = \int \lim f_n$ (순서 교환 가능)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>함수급수와 바이어슈트라스 M-판정법</h2>
+  <div class="info-panel">
+    함수급수 $\sum f_n(x)$의 평등 수렴을 판정하는 가장 실용적인 도구입니다.
+    <div class="formula-container" style="background:#0f172a; margin-top:10px;">
+      $$\text{만약 } |f_n(x)| \le M_n \text{ 이고 } \sum M_n \text{ 이 수렴하면, } \sum f_n(x) \text{ 는 평등 수렴한다.}$$
+    </div>
+  </div>
+
+  <h2>핵심 요약: 왜 평등 수렴이 중요한가?</h2>
+  <ul>
+    <li><b>극한의 교환:</b> 미분과 극한, 적분과 극한의 순서를 바꾸기 위해서는 평등 수렴이라는 '안전장치'가 필요합니다.</li>
+    <li><b>함수의 근사:</b> 복잡한 함수를 간단한 함수열(예: 다항식)로 근사할 때, 근사의 오차가 전체 영역에서 일정하게 작아짐을 보장합니다.</li>
+  </ul>
+
+  <div class="footer">
+    이 개념은 이후 <b>푸리에 급수</b>나 <b>복소해석학</b>에서 함수를 전개하고 해석하는 데 핵심적인 역할을 합니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

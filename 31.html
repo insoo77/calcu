@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 테일러 정리와 근사</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f43f5e; color:#9f1239;}
+  h3{font-size:1.3rem; color:#1e293b; margin-top:30px; border-left:5px solid #f43f5e; padding-left:15px;}
+  .lead{
+    font-size:1.1rem; background:linear-gradient(135deg,#fff1f2,#ffe4e6);
+    padding:22px; border-radius:14px; margin-bottom:30px; border-left:6px solid #f43f5e;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:25px; border-radius:16px;
+    margin:20px 0; overflow-x:auto; text-align: center;
+  }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;
+  }
+  .box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:20px; border-radius:16px;
+  }
+  .tag {
+    display:inline-block; padding:3px 10px; border-radius:6px; font-size:0.85rem;
+    font-weight:700; margin-bottom:10px; background:#fff1f2; color:#be123c;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>테일러 정리와 근사 (Taylor's Theorem)</h1>
+  <div class="lead">
+    테일러 정리는 함수 $f$가 특정 점에서 충분히 미분 가능할 때, 그 점에서의 도함수 값들을 계수로 가지는 <b>다항식</b>으로 함수를 표현할 수 있음을 보여줍니다.
+  </div>
+
+  <h2>1. 테일러 다항식 (Taylor Polynomial)</h2>
+  <p>$x=a$ 근처에서 함수 $f(x)$를 $n$차 다항식으로 근사한 형태입니다.</p>
+  
+  <div class="formula-container">
+    $$P_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x-a)^k$$
+  </div>
+  
+  <p>특히 $a=0$일 때의 테일러 급수를 <b>매클로린 급수(Maclaurin Series)</b>라고 부릅니다.</p>
+
+  <div class="grid">
+    <div class="box">
+      <div class="tag">Taylor's Theorem</div>
+      <h2>2. 테일러 정리와 나머지항</h2>
+      <p>함수 $f(x)$는 테일러 다항식과 오차항(나머지항)의 합으로 정확히 표현됩니다.</p>
+      <div class="formula-container">
+        $$f(x) = P_n(x) + R_n(x)$$
+      </div>
+      <p>여기서 <b>라그랑주 형태의 나머지항</b>은 다음과 같습니다.</p>
+      <div class="formula-container" style="background:#4c0519;">
+        $$R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}$$
+      </div>
+      <p class="small">($c$는 $a$와 $x$ 사이의 어떤 값)</p>
+    </div>
+
+    <div class="box">
+      <div class="tag">Linear Approximation</div>
+      <h2>3. 선형 근사 (1차 근사)</h2>
+      <p>테일러 다항식에서 $n=1$인 경우로, 접선의 방정식을 이용해 값을 추정합니다.</p>
+      <div class="formula-container">
+        $$L(x) = f(a) + f'(a)(x-a)$$
+      </div>
+      
+      <p>매우 작은 변화량 $\Delta x$에 대해 $f(a+\Delta x) \approx f(a) + f'(a)\Delta x$로 활용됩니다.</p>
+    </div>
+  </div>
+
+  <h2>4. 주요 함수의 매클로린 전개 ($a=0$)</h2>
+  <div class="box" style="border-left: 5px solid #f43f5e;">
+    <ul style="list-style-type: none; padding-left: 0;">
+      <li>🔹 $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots = \sum_{n=0}^{\infty} \frac{x^n}{n!}$</li>
+      <li>🔹 $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \dots = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}$</li>
+      <li>🔹 $\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \dots = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}$</li>
+      <li>🔹 $\frac{1}{1-x} = 1 + x + x^2 + x^3 + \dots \quad (|x| < 1)$</li>
+    </ul>
+  </div>
+
+  <h2>5. 왜 중요한가?</h2>
+  <ul>
+    <li><b>복잡한 계산의 단순화:</b> $\sin(0.1)$과 같은 값을 다항식 대입만으로 매우 정밀하게 구할 수 있습니다.</li>
+    <li><b>극한 계산:</b> 로피탈 정리를 쓰지 않고도 급수 전개를 통해 $\frac{0}{0}$ 꼴의 극한을 직관적으로 해결합니다.</li>
+    <li><b>물리학적 근사:</b> 진자의 운동에서 $\sin \theta \approx \theta$로 근사하는 것 등이 모두 테일러 1차 근사의 예시입니다.</li>
+  </ul>
+
+  <div class="footer">
+    나머지항 $R_n(x)$이 $n \to \infty$일 때 0으로 수렴하면, 함수는 테일러 급수와 완전히 일치하게 됩니다. <br>
+    © 2026 Advanced Calculus Analysis Series
+  </div>
+</div>
+</body>
+</html>

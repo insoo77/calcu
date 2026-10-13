@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - MVT를 이용한 부등식 증명</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#065f46;}
+  .lead{
+    font-size:1.1rem; background:#f0fdf4; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .problem { font-weight: 700; color: #047857; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fdfdfd; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #1e293b; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>MVT를 이용한 부등식 증명 예제</h1>
+  <div class="lead">
+    평균값 정리는 함수값의 차이($\Delta y$)를 도함수($f'$)와 독립변수의 차이($\Delta x$)의 곱으로 변환해줍니다. 이를 통해 함수의 증가 속도를 제어함으로써 부등식을 유도할 수 있습니다.
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 1. 모든 $a < b$ 에 대해 $|\sin b - \sin a| \le |b - a|$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $f(x) = \sin x$라 하자. $f(x)$는 모든 실수에서 연속이고 미분 가능하다.
+      <span class="step-title">[MVT 적용]</span> 구간 $[a, b]$에서 평균값 정리에 의해 다음을 만족하는 $c \in (a, b)$가 존재한다.
+      <div class="formula-container">$$\frac{\sin b - \sin a}{b - a} = f'(c) = \cos c$$</div>
+      양변에 절댓값을 취하면:
+      <div class="formula-container">$$\left| \frac{\sin b - \sin a}{b - a} \right| = |\cos c|$$</div>
+      모든 $c$에 대해 $|\cos c| \le 1$이므로, $|\sin b - \sin a| \le |b - a|$가 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 2. $x > 0$ 일 때, $\frac{x}{1+x} < \ln(1+x) < x$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $f(t) = \ln t$라 하고 구간 $[1, 1+x]$에서 MVT를 적용하자.
+      <div class="formula-container">$$\frac{\ln(1+x) - \ln 1}{(1+x) - 1} = f'(c) = \frac{1}{c} \quad (1 < c < 1+x)$$</div>
+      정리하면 $\ln(1+x) = \frac{x}{c}$이다.
+      <span class="step-title">[범위 평가]</span> $1 < c < 1+x$ 이므로 $\frac{1}{1+x} < \frac{1}{c} < 1$ 이다.
+      각 변에 $x(>0)$를 곱하면:
+      <div class="formula-container">$$\frac{x}{1+x} < \frac{x}{c} < x \implies \frac{x}{1+x} < \ln(1+x) < x$$</div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 3. $0 < a < b$ 일 때, $\frac{b-a}{b} < \ln\frac{b}{a} < \frac{b-a}{a}$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $f(x) = \ln x$를 구간 $[a, b]$에서 MVT를 적용한다.
+      <div class="formula-container">$$\frac{\ln b - \ln a}{b - a} = \frac{1}{c} \quad (a < c < b)$$</div>
+      $\ln\frac{b}{a} = \frac{b-a}{c}$이다. $a < c < b$ 이므로 $\frac{1}{b} < \frac{1}{c} < \frac{1}{a}$ 이다.
+      양변에 $b-a(>0)$를 곱하면 원하는 부등식이 도출된다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 4. $x > 0$ 일 때, $e^x > 1 + x$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $f(t) = e^t$라 하고 구간 $[0, x]$에서 MVT를 적용하자.
+      <div class="formula-container">$$\frac{e^x - e^0}{x - 0} = f'(c) = e^c \quad (0 < c < x)$$</div>
+      $e^x - 1 = x \cdot e^c$이다. $c > 0$ 이므로 $e^c > e^0 = 1$ 이다.
+      따라서 $e^x - 1 = x \cdot e^c > x \cdot 1$ 이 되어 $e^x > 1 + x$ 가 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="problem">예제 5. $b > a > 0$ 일 때, $n a^{n-1}(b-a) < b^n - a^n < n b^{n-1}(b-a)$ 임을 보이시오 ($n > 1$).</div>
+    <div class="solution">
+      <span class="step-title">[증명]</span> $f(x) = x^n$이라 하면 $f'(x) = nx^{n-1}$이다. 구간 $[a, b]$에서 MVT에 의해:
+      <div class="formula-container">$$\frac{b^n - a^n}{b - a} = n c^{n-1} \quad (a < c < b)$$</div>
+      $n>1$이고 $x>0$에서 $f'(x)$는 증가함수이므로, $a < c < b \implies n a^{n-1} < n c^{n-1} < n b^{n-1}$ 이다.
+      중앙항에 $\frac{b^n - a^n}{b - a}$를 대입하고 $b-a$를 곱하면 증명이 완료된다.
+    </div>
+  </div>
+
+  <div class="footer">
+    이러한 부등식들은 해석학에서 <b>오차 한계(Error bound)</b>를 설정하거나 <b>수렴성</b>을 증명할 때 기초가 됩니다. <br>
+    © 2026 Advanced Calculus Problem Solving Series
+  </div>
+</div>
+</body>
+</html>

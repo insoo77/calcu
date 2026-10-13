@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - ε-N 정의 증명 예제</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.2rem; margin:0 0 15px; color:#1e293b; text-align:center;}
+  h2{font-size:1.6rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #f59e0b; color:#78350f;}
+  .lead{
+    font-size:1.1rem; background:#fffbeb; padding:20px; border-radius:12px;
+    margin-bottom:30px; border-left:6px solid #f59e0b;
+  }
+  .example-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .status-badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#fef3c7; color:#92400e;
+  }
+  .problem { font-weight: 700; color: #1e293b; font-size: 1.15rem; margin-bottom: 15px; }
+  .solution { background: #fafafa; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; }
+  .step-title { font-weight: 700; color: #b45309; margin-top: 10px; display: block; }
+  .formula-container {
+    background:#1e293b; color:#f1f5f9; padding:15px; border-radius:10px;
+    margin:10px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>ε-N 정의를 활용한 수열의 극한 증명 5선</h1>
+  <div class="lead">
+    증명의 핵심은 <b>$|a_n - L| < \epsilon$</b>을 만족시키기 위해 <b>$n$에 대한 부등식</b>을 풀고, 그 결과로 나타나는 식보다 큰 자연수 <b>$N$</b>을 택하는 것입니다.
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 1. 일차식 분수 수열</div>
+    <div class="problem">예제 1. $\lim_{n \to \infty} \frac{3n+1}{n+2} = 3$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|\frac{3n+1}{n+2} - 3| = |\frac{3n+1 - 3n - 6}{n+2}| = \frac{5}{n+2} < \frac{5}{n} < \epsilon$ <br>
+      따라서 $n > 5/\epsilon$ 이면 충분하다.
+      <span class="step-title">[증명]</span> 임의의 $\epsilon > 0$ 에 대하여 $N > 5/\epsilon$ 인 자연수 $N$을 택하자. <br>
+      $n \ge N$ 이면, $|\frac{3n+1}{n+2} - 3| < \frac{5}{n} \le \frac{5}{N} < 5 \cdot \frac{\epsilon}{5} = \epsilon$ 이 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 2. 무리식 수열</div>
+    <div class="problem">예제 2. $\lim_{n \to \infty} (\sqrt{n+1} - \sqrt{n}) = 0$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|\sqrt{n+1} - \sqrt{n}| = \frac{1}{\sqrt{n+1} + \sqrt{n}} < \frac{1}{2\sqrt{n}} < \epsilon$ <br>
+      양변을 제곱하여 정리하면 $n > \frac{1}{4\epsilon^2}$ 이 유도된다.
+      <span class="step-title">[증명]</span> $\epsilon > 0$ 이 주어졌을 때, $N > \frac{1}{4\epsilon^2}$ 인 자연수 $N$을 잡자. <br>
+      $n \ge N$ 이면, $|\sqrt{n+1} - \sqrt{n}| < \frac{1}{2\sqrt{n}} \le \frac{1}{2\sqrt{N}} < \frac{1}{2\sqrt{1/4\epsilon^2}} = \epsilon$ 이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 3. 고차식 수열 (유계 활용)</div>
+    <div class="problem">예제 3. $\lim_{n \to \infty} \frac{n^2}{n^2 + 1} = 1$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|\frac{n^2}{n^2+1} - 1| = |\frac{-1}{n^2+1}| = \frac{1}{n^2+1} < \frac{1}{n^2} \le \frac{1}{n} < \epsilon$ (단, $n \ge 1$)
+      <span class="step-title">[증명]</span> 임의의 $\epsilon > 0$ 에 대해 $N > 1/\epsilon$ 인 $N \in \mathbb{N}$을 택하자. <br>
+      $n \ge N$ 이면, $|\frac{n^2}{n^2+1} - 1| < \frac{1}{n^2} \le \frac{1}{n} \le \frac{1}{N} < \epsilon$ 이 성립한다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge">Ex 4. 기하 수열 (Bernoulli 부등식 활용)</div>
+    <div class="problem">예제 4. $|r| < 1$ 일 때, $\lim_{n \to \infty} r^n = 0$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[분석]</span> $|r| = \frac{1}{1+h}$ ($h > 0$)라 두면, 베르누이 부등식에 의해 $(1+h)^n \ge 1+nh > nh$이다. <br>
+      따라서 $|r^n - 0| = |r|^n = \frac{1}{(1+h)^n} < \frac{1}{nh} < \epsilon$ 이 성립하려면 $n > \frac{1}{h\epsilon}$ 이어야 한다.
+      <span class="step-title">[증명]</span> $N > \frac{1}{h\epsilon}$ 인 $N$을 택하면, $n \ge N$ 일 때 $|r^n| < \frac{1}{nh} \le \frac{1}{Nh} < \epsilon$ 이다.
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="status-badge" style="background:#fee2e2; color:#b91c1c;">Ex 5. 무한대 발산</div>
+    <div class="problem">예제 5. $\lim_{n \to \infty} \frac{n^2-1}{n} = \infty$ 임을 증명하시오.</div>
+    <div class="solution">
+      <span class="step-title">[발산의 정의]</span> $\forall M > 0, \exists N \in \mathbb{N}$ s.t. $n \ge N \implies a_n > M$
+      <span class="step-title">[분석]</span> $\frac{n^2-1}{n} = n - \frac{1}{n} \ge n - 1 > M$. 따라서 $n > M+1$ 이면 된다.
+      <span class="step-title">[증명]</span> 임의의 $M > 0$ 에 대하여 $N > M+1$ 인 $N$을 택하자. <br>
+      $n \ge N$ 이면, $a_n = n - \frac{1}{n} \ge N - \frac{1}{n} > (M+1) - 1 = M$ 이 성립한다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    $\epsilon-N$ 증명은 결과보다 <b>"임의의 오차를 감당할 수 있는 $N$의 존재성"</b>을 보여주는 논리적 완결성이 중요합니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>

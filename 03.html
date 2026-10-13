@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>고급 미적분학 - 실수의 완비성과 동치 정리</title>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  body{
+    font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+    line-height:1.76; color:#1f2937; margin:0; background:#f8fafc; font-size:17px;
+  }
+  .page{
+    max-width:1140px; margin:0 auto; background:white; padding:42px 56px 80px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  }
+  h1{font-size:2.4rem; margin:0 0 15px; color:#0f172a; text-align:center;}
+  h2{font-size:1.7rem; margin-top:40px; padding-bottom:8px; border-bottom:3px solid #10b981; color:#064e3b;}
+  .lead{
+    font-size:1.1rem; background:#ecfdf5; padding:22px; border-radius:14px;
+    margin-bottom:30px; border-left:6px solid #10b981;
+  }
+  .theorem-box {
+    background:#ffffff; border:1px solid #e2e8f0; padding:25px; border-radius:16px; margin-bottom: 30px;
+  }
+  .proof-section {
+    background:#fafafa; border-left:4px solid #94a3b8; padding:15px; margin-top:15px; font-size:0.95rem;
+  }
+  .badge {
+    display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.9rem;
+    font-weight:700; margin-bottom:15px; background:#d1fae5; color:#047857;
+  }
+  .formula-container{
+    background:#1e293b; color:#f1f5f9; padding:20px; border-radius:12px;
+    margin:15px 0; overflow-x:auto; text-align: center;
+  }
+  .footer{margin-top:60px; padding:30px; text-align:center; color:#94a3b8; font-size:0.95rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>실수의 완비성 공리와 동치 정리</h1>
+  <div class="lead">
+    실수 체계 $\mathbb{R}$의 <b>완비성(Completeness)</b>은 "위로 유계인 집합은 상한을 갖는다"는 공리로부터 시작됩니다. 이 공리는 아래 4가지 중요한 정리들과 논리적으로 동치입니다.
+  </div>
+
+  <div class="theorem-box">
+    <div class="badge">Theorem 1. 단조수렴 정리 (Monotone Convergence Theorem)</div>
+    <p><b>정의:</b> 수열 $\{a_n\}$이 단조 증가하고 위로 유계이면, 이 수열은 반드시 수렴한다.</p>
+    <div class="proof-section">
+      <b>[증명: 상한 공리 $\implies$ MCT]</b> <br>
+      수열의 치역 $S = \{a_n : n \in \mathbb{N}\}$은 위로 유계이므로 상한 $L = \sup S$가 존재한다. <br>
+      임의의 $\epsilon > 0$에 대해 $L-\epsilon$은 상계가 아니므로 $a_N > L-\epsilon$인 $N$이 존재한다. <br>
+      수열이 단조 증가하므로 모든 $n \ge N$에 대해 $L-\epsilon < a_N \le a_n \le L < L+\epsilon$이다. <br>
+      따라서 $|a_n - L| < \epsilon$이 되어 수열은 $L$로 수렴한다.
+    </div>
+  </div>
+
+  <div class="theorem-box">
+    <div class="badge">Theorem 2. 축소구간 정리 (Nested Interval Property)</div>
+    <p><b>정의:</b> 유계인 닫힌 구간들의 수열 $I_n = [a_n, b_n]$이 $I_{n+1} \subset I_n$을 만족하면, $\bigcap_{n=1}^\infty I_n \neq \emptyset$이다.</p>
+    <div class="proof-section">
+      <b>[증명: MCT $\implies$ NIP]</b> <br>
+      구간이 중첩되므로 왼쪽 끝점 $a_n$은 단조 증가 수열이고, $b_n$에 의해 위로 유계이다. <br>
+      단조수렴 정리에 의해 $a_n \to a$로 수렴한다. <br>
+      이때 모든 $n$에 대해 $a_n \le a \le b_n$이 성립하므로, $a$는 모든 $I_n$에 포함된다.
+    </div>
+  </div>
+
+  
+
+  <div class="theorem-box">
+    <div class="badge">Theorem 3. 볼차노-바이어슈트라스 정리 (Bolzano-Weierstrass Theorem)</div>
+    <p><b>정의:</b> 유계인 모든 수열은 수렴하는 부분수열을 갖는다.</p>
+    <div class="proof-section">
+      <b>[증명: NIP $\implies$ BW]</b> <br>
+      수열 $\{x_n\}$이 유계이므로 $I_1 = [a, b]$ 안에 모든 항이 있다. <br>
+      $I_1$을 반으로 나누어 무한히 많은 항을 포함하는 쪽을 $I_2$로 택한다. <br>
+      이 과정을 반복하여 축소구간 수열 $I_k$를 만들면, NIP에 의해 공통점 $x$가 존재하며, 각 $I_k$에서 항을 하나씩 뽑아 만든 부분수열은 $x$로 수렴한다.
+    </div>
+  </div>
+
+  <div class="theorem-box">
+    <div class="badge">Theorem 4. 코시 판정법 (Cauchy Criterion)</div>
+    <p><b>정의:</b> 실수 수열 $\{a_n\}$이 수렴할 필요충분조건은 그 수열이 코시 수열인 것이다.</p>
+    <div class="proof-section">
+      <b>[증명: BW $\implies$ Cauchy]</b> <br>
+      코시 수열은 유계이므로 볼차노-바이어슈트라스 정리에 의해 수렴하는 부분수열 $\{a_{n_k}\}$를 갖는다 ($a_{n_k} \to L$). <br>
+      코시 수열의 성질($|a_n - a_m| < \epsilon$)과 부분수열의 수렴성을 삼각부등식으로 결합하면 전체 수열도 $L$로 수렴함을 보일 수 있다.
+    </div>
+  </div>
+
+  
+
+  <div class="footer">
+    이 동치 관계들은 실수의 <b>연속성</b>을 바라보는 서로 다른 창문입니다. <br>
+    © 2026 Advanced Mathematical Analysis Series
+  </div>
+</div>
+</body>
+</html>
